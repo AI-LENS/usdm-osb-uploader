@@ -242,7 +242,7 @@ async def create_study_structure_study_element_patch(
         return response.json()
 
 
-async def create_study_population(
+async def create_study_population_api(
     study_uid: str,
     therapeutic_area_codes: list[dict],
     disease_condition_or_indication_codes: list[dict],
