@@ -59,7 +59,7 @@ async def create_study(name: str, description: str):
             f"Failed to create study: {response.status_code} - {response.text}"
         )
     res = response.json()
-    return res
+    return res, current_study_number
 
 
 async def create_high_level_design(
@@ -311,6 +311,9 @@ async def create_study_population_api(
 async def create_study_criteria_inclusion_criteria_templates(
     study_uid: str, name: str, library_name: str, type_uid: str
 ):  # criteria_preinstance
+    print(
+        f"Creating criteria template: {name}, Type UID: {type_uid}, Study UID: {study_uid}"
+    )
     endpoint = f"{settings.osb_base_url}/criteria-templates"
     req_body = {
         "name": name,
@@ -814,7 +817,7 @@ async def create_study_activities_approvals(activity_uid: str):
         return response.json()
 
 
-async def create_study_activity(
+async def create_study_activity_api(
     study_uid: str,
     group_uid: str,
     subgroup_uid: str,

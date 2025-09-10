@@ -3,8 +3,10 @@ import json
 from cyclopts import App
 from pydantic import FilePath
 
+from .osb.activities import create_study_activity
 from .osb.arms import create_study_arm
 from .osb.create_study import create_study_id
+from .osb.criteria import create_study_criteria
 from .osb.elements import create_study_element
 from .osb.high_level_design import create_study_high_level_design
 from .osb.objectivies_endpoints import create_study_objective_endpoint
@@ -23,7 +25,8 @@ def load_study_design(usdm_file: FilePath):
 async def usdm_osb_uploader(usdm_file: FilePath):
     """Upload a USDM file to the OSB system."""
     usdm_data = load_study_design(usdm_file)
-    study_uid = await create_study_id(usdm_data)
+    study_uid, study_id = await create_study_id(usdm_data)
+    study_version = usdm_data.get("study", {}).get("versions", [])[0]
     study_designs = (
         usdm_data.get("study", {}).get("versions", [])[0].get("studyDesigns", [])
     )
@@ -32,14 +35,16 @@ async def usdm_osb_uploader(usdm_file: FilePath):
     await create_study_population(study_designs, study_uid)
     await create_study_objective_endpoint(study_designs, study_uid)
     await create_study_element(study_designs, study_uid)
+    await create_study_criteria(study_version, study_uid)
+    await create_study_activity(study_version, study_uid, study_id)
 
 
 @cli.command
 async def create_study_uid(usdm_file: FilePath):
     """Create a study in the OSB system."""
     usdm_data = load_study_design(usdm_file)
-    study_uid = await create_study_id(usdm_data)
-    return study_uid
+    study_uid, study_id = await create_study_id(usdm_data)
+    return study_uid, study_id
 
 
 @cli.command
@@ -59,8 +64,7 @@ async def create_study_arms(usdm_file: FilePath, study_uid: str):
     study_designs = (
         usdm_data.get("study", {}).get("versions", [])[0].get("studyDesigns", [])
     )
-    arms_response = await create_study_arm(study_designs, study_uid)
-    return arms_response
+    await create_study_arm(study_designs, study_uid)
 
 
 @cli.command
@@ -70,8 +74,7 @@ async def create_study_populations(usdm_file: FilePath, study_uid: str):
     study_designs = (
         usdm_data.get("study", {}).get("versions", [])[0].get("studyDesigns", [])
     )
-    population_response = await create_study_population(study_designs, study_uid)
-    return population_response
+    await create_study_population(study_designs, study_uid)
 
 
 @cli.command
@@ -81,10 +84,7 @@ async def create_study_objectives_endpoints(usdm_file: FilePath, study_uid: str)
     study_designs = (
         usdm_data.get("study", {}).get("versions", [])[0].get("studyDesigns", [])
     )
-    objectives_response = await create_study_objective_endpoint(
-        study_designs, study_uid
-    )
-    return objectives_response
+    await create_study_objective_endpoint(study_designs, study_uid)
 
 
 @cli.command
@@ -94,5 +94,20 @@ async def create_study_elements(usdm_file: FilePath, study_uid: str):
     study_designs = (
         usdm_data.get("study", {}).get("versions", [])[0].get("studyDesigns", [])
     )
-    elements_response = await create_study_element(study_designs, study_uid)
-    return elements_response
+    await create_study_element(study_designs, study_uid)
+
+
+@cli.command
+async def create_study_criteria_cmd(usdm_file: FilePath, study_uid: str):
+    """Create study criteria in the OSB system."""
+    usdm_data = load_study_design(usdm_file)
+    study_version = usdm_data.get("study", {}).get("versions", [])[0]
+    await create_study_criteria(study_version, study_uid)
+
+
+@cli.command
+async def create_study_activities(usdm_file: FilePath, study_uid: str, study_id: str):
+    """Create study activities in the OSB system."""
+    usdm_data = load_study_design(usdm_file)
+    study_version = usdm_data.get("study", {}).get("versions", [])[0]
+    await create_study_activity(study_version, study_uid, study_id)

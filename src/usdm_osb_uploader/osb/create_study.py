@@ -14,11 +14,11 @@ async def create_study_id(usdm_data: dict) -> dict:
             title2 = title.get("text", "")  # noqa: F841
 
     name = study_info.get("name", "")
-    response = await create_study(name, title1)
+    response, current_study_number = await create_study(name, title1)
 
     if response:
         study_uid = response["uid"]
-        return study_uid
+        return study_uid, f"999-{current_study_number}"
     else:
         print("Failed to create study")
         return None
