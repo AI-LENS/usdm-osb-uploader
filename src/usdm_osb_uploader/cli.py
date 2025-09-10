@@ -1,10 +1,14 @@
+import json
+
 from cyclopts import App
 from pydantic import FilePath
-import json
+
+from .osb.arms import create_study_arm
 from .osb.create_study import create_study_id
 from .osb.high_level_design import create_study_high_level_design
 
 cli = App()
+
 
 @cli.command
 async def create_study_uid(usdm_file: FilePath):
@@ -14,6 +18,7 @@ async def create_study_uid(usdm_file: FilePath):
     study_uid = await create_study_id(usdm_data)
     return study_uid
 
+
 def load_study_design(usdm_file: FilePath):
     with open(usdm_file, "r", encoding="utf-8") as f:
         json_data = json.load(f)
@@ -22,10 +27,17 @@ def load_study_design(usdm_file: FilePath):
     study_designs = study_versions[0].get("studyDesigns", [])
     return study_designs
 
+
 @cli.command
 async def create_study_properties(usdm_file: FilePath, study_uid: str):
     """Create a study properties in the OSB system."""
     study_designs = load_study_design(usdm_file)
     return await create_study_high_level_design(study_designs, study_uid)
 
-    
+
+@cli.command
+async def create_study_arms(usdm_file: FilePath, study_uid: str):
+    """Create study arms in the OSB system."""
+    study_designs = load_study_design(usdm_file)
+    arms_response = await create_study_arm(study_designs, study_uid)
+    return arms_response

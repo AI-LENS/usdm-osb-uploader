@@ -19,3 +19,8 @@ osb = "usdm_osb_uploader:main"
 [build-system]
 requires = ["hatchling"]
 build-backend = "hatchling.build"
+
+[dependency-groups]
+dev = [
+  "pre-commit>=4.3.0",
+]

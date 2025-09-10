@@ -1,6 +1,8 @@
-from ..settings import settings
 import httpx
+
+from ..settings import settings
 from .osb_api import create_high_level_design
+
 
 async def create_study_high_level_design(study_designs: list, study_uid: str):
     headers = {"accept": "application/json, text/plain, */*"}
@@ -64,18 +66,14 @@ async def create_study_high_level_design(study_designs: list, study_uid: str):
                     items = response.json().get("items", [])
                     for code in trial_type_codes_list:
                         for item in items:
-                            codelists = item.get("attributes", {}).get(
-                                "concept_id", ""
-                            )
+                            codelists = item.get("attributes", {}).get("concept_id", "")
                             if codelists == code:
-                                trial_type_codes.append(
-                                    {
-                                        "term_uid": item.get("term_uid", "string"),
-                                        "name": item.get("name", {}).get(
-                                            "sponsor_preferred_name", "string"
-                                        ),
-                                    }
-                                )
+                                trial_type_codes.append({
+                                    "term_uid": item.get("term_uid", "string"),
+                                    "name": item.get("name", {}).get(
+                                        "sponsor_preferred_name", "string"
+                                    ),
+                                })
                                 break
 
     response = await create_high_level_design(

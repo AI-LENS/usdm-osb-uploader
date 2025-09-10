@@ -1,7 +1,9 @@
-import httpx
-from ..settings import settings
-from pydantic import RootModel, BaseModel, Field
 from typing import Annotated
+
+import httpx
+from pydantic import BaseModel, Field, RootModel
+
+from ..settings import settings
 
 
 class StudyMinimal(BaseModel):
@@ -13,7 +15,6 @@ class StudyMinimal(BaseModel):
         Field(description="ID of the study, e.g. 'NN1234-56789'", title="Id"),
     ] = None
     acronym: Annotated[str | None, Field(title="Acronym")] = None
-
 
 
 async def create_study(name: str, description: str):
@@ -47,12 +48,19 @@ async def create_study(name: str, description: str):
         response = await client.post(
             new_study_endpoint, json=study_payload, headers=headers
         )
-    if response.status_code == 422 or response.status_code == 400 or response.status_code == 404 or response.status_code == 409 or response.status_code == 500:
-            raise Exception(
-                f"Failed to create study: {response.status_code} - {response.text}"
-            )
+    if (
+        response.status_code == 422
+        or response.status_code == 400
+        or response.status_code == 404
+        or response.status_code == 409
+        or response.status_code == 500
+    ):
+        raise Exception(
+            f"Failed to create study: {response.status_code} - {response.text}"
+        )
     res = response.json()
     return res
+
 
 async def create_high_level_design(
     study_uid: str,
@@ -86,12 +94,19 @@ async def create_high_level_design(
     }
     async with httpx.AsyncClient() as client:
         response = await client.patch(endpoint, json=req_body)
-        if response.status_code == 422 or response.status_code == 400 or response.status_code == 404 or response.status_code == 409 or response.status_code == 500:
+        if (
+            response.status_code == 422
+            or response.status_code == 400
+            or response.status_code == 404
+            or response.status_code == 409
+            or response.status_code == 500
+        ):
             raise Exception(
                 f"Failed to create study properties: {response.status_code} - {response.text}"
             )
         response.raise_for_status()
         return response.json()
+
 
 async def create_study_structure_study_arm(
     study_uid: str,
@@ -115,13 +130,20 @@ async def create_study_structure_study_arm(
     }
     async with httpx.AsyncClient() as client:
         response = await client.post(endpoint, json=req_body)
-        if response.status_code == 422 or response.status_code == 400 or response.status_code == 404 or response.status_code == 409 or response.status_code == 500:
+        if (
+            response.status_code == 422
+            or response.status_code == 400
+            or response.status_code == 404
+            or response.status_code == 409
+            or response.status_code == 500
+        ):
             raise Exception(
                 f"Failed to create study arm: {response.status_code} - {response.text}"
             )
         response.raise_for_status()
         return response.json()
-    
+
+
 async def create_study_structure_study_epoch(
     study_uid: str,
     epoch_type: str,
@@ -129,7 +151,7 @@ async def create_study_structure_study_epoch(
     start_rule: str,
     end_rule: str,
     order: str,
-    description: str
+    description: str,
 ):
     endpoint = f"{settings.osb_base_url}/studies/{study_uid}/study-epochs"
     req_body = {
@@ -144,12 +166,18 @@ async def create_study_structure_study_epoch(
     }
     async with httpx.AsyncClient() as client:
         response = await client.post(endpoint, json=req_body)
-        if response.status_code == 422 or response.status_code == 400 or response.status_code == 404 or response.status_code == 409 or response.status_code == 500:
+        if (
+            response.status_code == 422
+            or response.status_code == 400
+            or response.status_code == 404
+            or response.status_code == 409
+            or response.status_code == 500
+        ):
             raise Exception(
                 f"Failed to create study epoch: {response.status_code} - {response.text}"
             )
         return response.json()
-    
+
 
 async def create_study_structure_study_element(
     study_uid: str,
@@ -175,19 +203,22 @@ async def create_study_structure_study_element(
     }
     async with httpx.AsyncClient() as client:
         response = await client.post(endpoint, json=req_body)
-        if response.status_code == 422 or response.status_code == 400 or response.status_code == 404 or response.status_code == 409 or response.status_code == 500:
+        if (
+            response.status_code == 422
+            or response.status_code == 400
+            or response.status_code == 404
+            or response.status_code == 409
+            or response.status_code == 500
+        ):
             raise Exception(
                 f"Failed to create study element: {response.status_code} - {response.text}"
             )
         response.raise_for_status()
         return response.json()
-    
+
+
 async def create_study_structure_study_element_patch(
-    study_uid: str,
-    name: str,
-    subtype_uid: str,
-    short_name: str,
-    study_element_uid: str
+    study_uid: str, name: str, subtype_uid: str, short_name: str, study_element_uid: str
 ):  # working fine
     endpoint = f"{settings.osb_base_url}/studies/{study_uid}/study-elements/{study_element_uid}"
     req_body = {
@@ -197,13 +228,20 @@ async def create_study_structure_study_element_patch(
     }
     async with httpx.AsyncClient() as client:
         response = await client.patch(endpoint, json=req_body)
-        if response.status_code == 422 or response.status_code == 400 or response.status_code == 404 or response.status_code == 409 or response.status_code == 500:
+        if (
+            response.status_code == 422
+            or response.status_code == 400
+            or response.status_code == 404
+            or response.status_code == 409
+            or response.status_code == 500
+        ):
             raise Exception(
                 f"Failed to update study element: {response.status_code} - {response.text}"
             )
         response.raise_for_status()
         return response.json()
-    
+
+
 async def create_study_population(
     study_uid: str,
     therapeutic_area_codes: list[dict],
@@ -258,10 +296,17 @@ async def create_study_population(
     }
     async with httpx.AsyncClient() as client:
         response = await client.patch(endpoint, json=req_body)
-        if response.status_code == 422 or response.status_code == 400 or response.status_code == 404 or response.status_code == 409 or response.status_code == 500:
+        if (
+            response.status_code == 422
+            or response.status_code == 400
+            or response.status_code == 404
+            or response.status_code == 409
+            or response.status_code == 500
+        ):
             print(f"Error response: {response.status_code} - {response.text}")
         response.raise_for_status()
         return response.json()
+
 
 async def create_study_criteria_inclusion_criteria_templates(
     study_uid: str, name: str, library_name: str, type_uid: str
@@ -279,7 +324,13 @@ async def create_study_criteria_inclusion_criteria_templates(
     }
     async with httpx.AsyncClient() as client:
         response = await client.post(endpoint, json=req_body)
-        if response.status_code == 422 or response.status_code == 400 or response.status_code == 404 or response.status_code == 409 or response.status_code == 500:
+        if (
+            response.status_code == 422
+            or response.status_code == 400
+            or response.status_code == 404
+            or response.status_code == 409
+            or response.status_code == 500
+        ):
             raise Exception(
                 f"Failed to create study criteria-template - Invalid data: {response.status_code} - {response.text}"
             )
@@ -288,13 +339,19 @@ async def create_study_criteria_inclusion_criteria_templates(
 
 
 async def create_study_criteria_inclusion_approvals(
-    criteria_template_uid: str
+    criteria_template_uid: str,
 ):  # criteria_template
     endpoint = f"{settings.osb_base_url}/criteria-templates/{criteria_template_uid}/approvals?cascade=true"
     HEADERS = {"Content-Type": "application/json"}
     async with httpx.AsyncClient() as client:
         response = await client.post(endpoint, headers=HEADERS)
-        if response.status_code == 422 or response.status_code == 400 or response.status_code == 404 or response.status_code == 409 or response.status_code == 500:
+        if (
+            response.status_code == 422
+            or response.status_code == 400
+            or response.status_code == 404
+            or response.status_code == 409
+            or response.status_code == 500
+        ):
             raise Exception(
                 f"Failed to create study criteria-approval - Invalid data: {response.status_code} - {response.text}"
             )
@@ -314,7 +371,13 @@ async def create_concepts_numeric(
 
     async with httpx.AsyncClient() as client:
         response = await client.post(endpoint, json=req_body)
-        if response.status_code == 422 or response.status_code == 400 or response.status_code == 404 or response.status_code == 409 or response.status_code == 500:
+        if (
+            response.status_code == 422
+            or response.status_code == 400
+            or response.status_code == 404
+            or response.status_code == 409
+            or response.status_code == 500
+        ):
             raise Exception(
                 f"Failed to create study concept-numeric - Invalid data: {response.status_code} - {response.text}"
             )
@@ -330,7 +393,7 @@ async def create_concepts_numeric_with_unit(
     library_name: str,
     template_parameter: bool,
     value: int,
-    unit_definition_uid: str
+    unit_definition_uid: str,
 ):  # numeric_value_with_unit
     endpoint = f"{settings.osb_base_url}/concepts/numeric-values-with-unit"
     req_body = {
@@ -346,7 +409,13 @@ async def create_concepts_numeric_with_unit(
 
     async with httpx.AsyncClient() as client:
         response = await client.post(endpoint, json=req_body)
-        if response.status_code == 422 or response.status_code == 400 or response.status_code == 404 or response.status_code == 409 or response.status_code == 500:
+        if (
+            response.status_code == 422
+            or response.status_code == 400
+            or response.status_code == 404
+            or response.status_code == 409
+            or response.status_code == 500
+        ):
             raise Exception(
                 f"Failed to create study concept-numeric-with-unit - Invalid data: {response.status_code} - {response.text}"
             )
@@ -368,13 +437,20 @@ async def create_study_criteria_inclusion_create_criteria(
 
     async with httpx.AsyncClient() as client:
         response = await client.post(endpoint, json=req_body)
-        if response.status_code == 422 or response.status_code == 400 or response.status_code == 404 or response.status_code == 409 or response.status_code == 500:
+        if (
+            response.status_code == 422
+            or response.status_code == 400
+            or response.status_code == 404
+            or response.status_code == 409
+            or response.status_code == 500
+        ):
             raise Exception(
                 f"Failed to create study criteria - Invalid data: {response.status_code} - {response.text}"
             )
         response.raise_for_status()
         return response.json()
-    
+
+
 async def create_study_purpose_objective_templates(
     study_uid: str, name: str, library_name: str
 ):
@@ -390,7 +466,13 @@ async def create_study_purpose_objective_templates(
     }
     async with httpx.AsyncClient() as client:
         response = await client.post(endpoint, json=req_body)
-        if response.status_code == 422 or response.status_code == 400 or response.status_code == 404 or response.status_code == 409 or response.status_code == 500:
+        if (
+            response.status_code == 422
+            or response.status_code == 400
+            or response.status_code == 404
+            or response.status_code == 409
+            or response.status_code == 500
+        ):
             raise Exception(
                 f"Failed to create objective template - Invalid data: {response.status_code} - {response.text}"
             )
@@ -398,24 +480,26 @@ async def create_study_purpose_objective_templates(
         return response.json()
 
 
-async def get_objective_template_status(
-    objective_template_uid: str
-) -> dict:
+async def get_objective_template_status(objective_template_uid: str) -> dict:
     """Get the current status of an objective template"""
     endpoint = f"{settings.osb_base_url}/objective-templates/{objective_template_uid}"
     headers = {"accept": "application/json"}
 
     async with httpx.AsyncClient() as client:
         response = await client.get(endpoint, headers=headers)
-        if response.status_code == 422 or response.status_code == 400 or response.status_code == 404 or response.status_code == 409 or response.status_code == 500:
+        if (
+            response.status_code == 422
+            or response.status_code == 400
+            or response.status_code == 404
+            or response.status_code == 409
+            or response.status_code == 500
+        ):
             raise Exception(f"Objective template {objective_template_uid} not found")
         response.raise_for_status()
         return response.json()
 
 
-async def create_study_objective_approvals(
-    objective_template_uid: str
-):
+async def create_study_objective_approvals(objective_template_uid: str):
     # First check if the objective template is already approved
     try:
         template_data = await get_objective_template_status(objective_template_uid)
@@ -433,7 +517,13 @@ async def create_study_objective_approvals(
 
         async with httpx.AsyncClient() as client:
             response = await client.post(endpoint, headers=HEADERS)
-            if response.status_code == 422 or response.status_code == 400 or response.status_code == 404 or response.status_code == 409 or response.status_code == 500:
+            if (
+                response.status_code == 422
+                or response.status_code == 400
+                or response.status_code == 404
+                or response.status_code == 409
+                or response.status_code == 500
+            ):
                 raise Exception(
                     f"Failed to approve objective template - Invalid data: {response.status_code} - {response.text}"
                 )
@@ -461,13 +551,20 @@ async def create_study_objective_create_objective(
 
     async with httpx.AsyncClient() as client:
         response = await client.post(endpoint, json=req_body)
-        if response.status_code == 422 or response.status_code == 400 or response.status_code == 404 or response.status_code == 409 or response.status_code == 500:
+        if (
+            response.status_code == 422
+            or response.status_code == 400
+            or response.status_code == 404
+            or response.status_code == 409
+            or response.status_code == 500
+        ):
             raise Exception(
                 f"Failed to create study objective - Invalid data: {response.status_code} - {response.text}"
             )
         response.raise_for_status()
         return response.json()
-    
+
+
 async def create_study_purpose_endpoint_templates(
     study_uid: str, name: str, library_name: str
 ):
@@ -483,7 +580,13 @@ async def create_study_purpose_endpoint_templates(
     }
     async with httpx.AsyncClient() as client:
         response = await client.post(endpoint, json=req_body)
-        if response.status_code == 422 or response.status_code == 400 or response.status_code == 404 or response.status_code == 409 or response.status_code == 500:
+        if (
+            response.status_code == 422
+            or response.status_code == 400
+            or response.status_code == 404
+            or response.status_code == 409
+            or response.status_code == 500
+        ):
             raise Exception(
                 f"Failed to create endpoint template - Invalid data: {response.status_code} - {response.text}"
             )
@@ -491,24 +594,26 @@ async def create_study_purpose_endpoint_templates(
         return response.json()
 
 
-async def get_endpoint_template_status(
-    endpoint_template_uid: str
-) -> dict:
+async def get_endpoint_template_status(endpoint_template_uid: str) -> dict:
     """Get the current status of an endpoint template"""
     endpoint = f"{settings.osb_base_url}/endpoint-templates/{endpoint_template_uid}"
     headers = {"accept": "application/json"}
 
     async with httpx.AsyncClient() as client:
         response = await client.get(endpoint, headers=headers)
-        if response.status_code == 422 or response.status_code == 400 or response.status_code == 404 or response.status_code == 409 or response.status_code == 500:
+        if (
+            response.status_code == 422
+            or response.status_code == 400
+            or response.status_code == 404
+            or response.status_code == 409
+            or response.status_code == 500
+        ):
             raise Exception(f"Endpoint template {endpoint_template_uid} not found")
         response.raise_for_status()
         return response.json()
 
 
-async def create_study_endpoint_approvals(
-    endpoint_template_uid: str
-):
+async def create_study_endpoint_approvals(endpoint_template_uid: str):
     # First check if the endpoint template is already approved
     try:
         template_data = await get_endpoint_template_status(endpoint_template_uid)
@@ -526,7 +631,13 @@ async def create_study_endpoint_approvals(
 
         async with httpx.AsyncClient() as client:
             response = await client.post(endpoint, headers=HEADERS)
-            if response.status_code == 422 or response.status_code == 400 or response.status_code == 404 or response.status_code == 409 or response.status_code == 500:
+            if (
+                response.status_code == 422
+                or response.status_code == 400
+                or response.status_code == 404
+                or response.status_code == 409
+                or response.status_code == 500
+            ):
                 raise Exception(
                     f"Failed to approve endpoint template - Invalid data: {response.status_code} - {response.text}"
                 )
@@ -544,7 +655,7 @@ async def create_study_endpoint_create_objective(
     uid: str,
     study_objective_uid: str,
     endpoint_level_uid: str,
-    endpoint_sublevel_uid: str
+    endpoint_sublevel_uid: str,
 ):
     endpoint = f"{settings.osb_base_url}/studies/{study_uid}/study-endpoints?create_endpoint=true"
     req_body = {
@@ -562,7 +673,13 @@ async def create_study_endpoint_create_objective(
 
     async with httpx.AsyncClient() as client:
         response = await client.post(endpoint, json=req_body)
-        if response.status_code == 422 or response.status_code == 400 or response.status_code == 404 or response.status_code == 409 or response.status_code == 500:
+        if (
+            response.status_code == 422
+            or response.status_code == 400
+            or response.status_code == 404
+            or response.status_code == 409
+            or response.status_code == 500
+        ):
             raise Exception(
                 f"Failed to create study endpoint - Invalid data: {response.status_code} - {response.text}"
             )
@@ -605,7 +722,13 @@ async def create_study_structure_study_visit(
     }
     async with httpx.AsyncClient() as client:
         response = await client.post(preview_endpoint, json=req_body)
-        if response.status_code == 422 or response.status_code == 400 or response.status_code == 404 or response.status_code == 409 or response.status_code == 500:
+        if (
+            response.status_code == 422
+            or response.status_code == 400
+            or response.status_code == 404
+            or response.status_code == 409
+            or response.status_code == 500
+        ):
             raise Exception(
                 f"Failed to create study visit preview: {response.status_code} - {response.text}"
             )
@@ -620,12 +743,19 @@ async def create_study_structure_study_visit(
     submit_req_body["is_global_anchor_visit"] = is_global_anchor_visit
     async with httpx.AsyncClient() as client:
         response = await client.post(submit_endpoint, json=submit_req_body)
-        if response.status_code == 422 or response.status_code == 400 or response.status_code == 404 or response.status_code == 409 or response.status_code == 500:
+        if (
+            response.status_code == 422
+            or response.status_code == 400
+            or response.status_code == 404
+            or response.status_code == 409
+            or response.status_code == 500
+        ):
             raise Exception(
                 f"Failed to create study visit: {response.status_code} - {response.text}"
             )
         response.raise_for_status()
         return response.json()
+
 
 async def create_study_activities_concept(
     name: str,
@@ -651,7 +781,13 @@ async def create_study_activities_concept(
     }
     async with httpx.AsyncClient() as client:
         response = await client.post(endpoint, json=req_body, headers=HEADERS)
-        if response.status_code == 422 or response.status_code == 400 or response.status_code == 404 or response.status_code == 409 or response.status_code == 500:
+        if (
+            response.status_code == 422
+            or response.status_code == 400
+            or response.status_code == 404
+            or response.status_code == 409
+            or response.status_code == 500
+        ):
             raise Exception(
                 f"Failed to create study activity-concept - Invalid data: {response.status_code} - {response.text}"
             )
@@ -659,26 +795,31 @@ async def create_study_activities_concept(
         return response.json()
 
 
-async def create_study_activities_approvals(
-    activity_uid: str
-):
+async def create_study_activities_approvals(activity_uid: str):
     endpoint = f"{settings.osb_base_url}/concepts/activities/activities/{activity_uid}/approvals"
     HEADERS = {"Content-Type": "application/json"}
     async with httpx.AsyncClient() as client:
         response = await client.post(endpoint, headers=HEADERS)
-        if response.status_code == 422 or response.status_code == 400 or response.status_code == 404 or response.status_code == 409 or response.status_code == 500:
+        if (
+            response.status_code == 422
+            or response.status_code == 400
+            or response.status_code == 404
+            or response.status_code == 409
+            or response.status_code == 500
+        ):
             raise Exception(
                 f"Failed to create study activity-approval - Invalid data: {response.status_code} - {response.text}"
             )
         response.raise_for_status()
         return response.json()
-    
+
+
 async def create_study_activity(
-        study_uid: str,
-        group_uid: str,
-        subgroup_uid: str,
-        activity_uid: str, 
-        posted_uids: set
+    study_uid: str,
+    group_uid: str,
+    subgroup_uid: str,
+    activity_uid: str,
+    posted_uids: set,
 ):
     if activity_uid in posted_uids:
         return
@@ -687,7 +828,7 @@ async def create_study_activity(
         "activity_uid": activity_uid,
         "activity_subgroup_uid": subgroup_uid,
         "activity_group_uid": group_uid,
-        "activity_instance_uid": None
+        "activity_instance_uid": None,
     }
     endpoint = f"{settings.osb_base_url}/studies/{study_uid}/study-activities"
     HEADERS = {"Content-Type": "application/json"}
@@ -703,6 +844,7 @@ async def create_study_activity(
             )
 
     return response.json()
+
 
 async def create_study_activity_schedule(
     study_uid: str, study_activity_uid: str, study_visit_uid: str
@@ -726,7 +868,13 @@ async def create_study_activity_schedule(
     async with httpx.AsyncClient() as client:
         response = await client.post(endpoint, json=payload, headers=headers)
 
-        if response.status_code == 422 or response.status_code == 400 or response.status_code == 404 or response.status_code == 409 or response.status_code == 500:
+        if (
+            response.status_code == 422
+            or response.status_code == 400
+            or response.status_code == 404
+            or response.status_code == 409
+            or response.status_code == 500
+        ):
             raise Exception(
                 f"Failed to create activity schedule: {response.status_code} - {response.text}"
             )
