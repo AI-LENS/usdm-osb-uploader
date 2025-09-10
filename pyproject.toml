@@ -1,0 +1,21 @@
+[project]
+name = "usdm-osb-uploader"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+authors = [
+    { name = "H Chekresh", email = "hosbectchekresh@gmail.com" }
+]
+requires-python = ">=3.13"
+dependencies = [
+    "cyclopts>=3.24.0",
+    "httpx>=0.28.1",
+    "pydantic-settings>=2.10.1",
+]
+
+[project.scripts]
+osb = "usdm_osb_uploader:main"
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
