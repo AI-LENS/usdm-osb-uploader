@@ -9,10 +9,12 @@ from .osb.create_study import create_study_id
 from .osb.criteria import create_study_criteria
 from .osb.download_usdm import download_usdm
 from .osb.elements import create_study_element
-from .osb.epochs_visits_soa import create_epochs_visits_soa
+from .osb.epochs import create_study_epochs
 from .osb.high_level_design import create_study_high_level_design
 from .osb.objectivies_endpoints import create_study_objective_endpoint
 from .osb.population import create_study_population
+from .osb.soa import create_schedule_of_activity
+from .osb.visits import create_study_visits
 
 cli = App()
 
@@ -34,12 +36,14 @@ async def usdm_osb_uploader(usdm_file: FilePath):
     )
     await create_study_high_level_design(study_designs, study_uid)
     await create_study_arm(study_designs, study_uid)
-    await create_study_population(study_designs, study_uid)
-    await create_study_objective_endpoint(study_designs, study_uid)
+    await create_study_epochs(study_designs, study_uid)
     await create_study_element(study_designs, study_uid)
+    await create_study_visits(study_designs, study_uid)
+    await create_study_population(study_designs, study_uid)
     await create_study_criteria(study_version, study_uid)
+    await create_study_objective_endpoint(study_designs, study_uid)
     await create_study_activity(study_version, study_uid, study_id)
-    await create_epochs_visits_soa(study_designs, study_uid)
+    await create_schedule_of_activity(study_designs, study_uid)
     await download_usdm(study_uid)
 
 
@@ -118,13 +122,33 @@ async def create_study_activities(usdm_file: FilePath, study_uid: str, study_id:
 
 
 @cli.command
-async def create_study_epochs_visits_soa(usdm_file: FilePath, study_uid: str):
-    """Create study epochs, visits and schedule of activities in the OSB system."""
+async def create_study_epochs_cmd(usdm_file: FilePath, study_uid: str):
+    """Create study epochs in the OSB system."""
     usdm_data = load_study_design(usdm_file)
     study_designs = (
         usdm_data.get("study", {}).get("versions", [])[0].get("studyDesigns", [])
     )
-    await create_epochs_visits_soa(study_designs, study_uid)
+    await create_study_epochs(study_designs, study_uid)
+
+
+@cli.command
+async def create_study_visits_cmd(usdm_file: FilePath, study_uid: str):
+    """Create study visits in the OSB system."""
+    usdm_data = load_study_design(usdm_file)
+    study_designs = (
+        usdm_data.get("study", {}).get("versions", [])[0].get("studyDesigns", [])
+    )
+    await create_study_visits(study_designs, study_uid)
+
+
+@cli.command
+async def create_soa(usdm_file: FilePath, study_uid: str):
+    """Create schedule of activities in the OSB system."""
+    usdm_data = load_study_design(usdm_file)
+    study_designs = (
+        usdm_data.get("study", {}).get("versions", [])[0].get("studyDesigns", [])
+    )
+    await create_schedule_of_activity(study_designs, study_uid)
 
 
 @cli.command
