@@ -1,5 +1,8 @@
 import re
 
+import httpx
+
+from ..settings import settings
 from .osb_api import (
     create_study_criteria_inclusion_approvals,
     create_study_criteria_inclusion_create_criteria,
@@ -15,15 +18,23 @@ async def create_study_criteria(study_version: list, study_uid: str):
     mapped_criteria = []
     for design in study_designs:
         for crit in design.get("eligibilityCriteria", []):
-            cat = crit.get("category", {}).get("decode", "").lower()
-            crit_type = "inclusion" if cat.startswith("in") else "exclusion"
+            crit_type = crit.get("category", {}).get("decode", "").lower()
             item_id = crit.get("criterionItemId")
             raw_text = text_map.get(item_id, "")
             mapped_criteria.append({"id": item_id, "type": crit_type, "text": raw_text})
 
     for crit in mapped_criteria:
-        is_inclusion = crit["type"] == "inclusion"
-        type_uid = "CTTerm_000028" if is_inclusion else "CTTerm_000029"
+        async with httpx.AsyncClient() as client:
+            response = await client.get(
+                f"{settings.osb_base_url}/ct/terms?codelist_uid=C66797&page_number=1&page_size=1000"
+            )
+            for item in response.json().get("items", []):
+                if (
+                    item.get("name", {}).get("sponsor_preferred_name", "").lower()
+                    == crit["type"]
+                ):
+                    type_uid = item.get("term_uid")
+                    break
 
         raw_html = crit.get("text", "")
         plain_text = re.sub(r"<[^>]+>", "", raw_html).strip()

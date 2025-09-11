@@ -28,10 +28,17 @@ async def create_study_objective_endpoint(study_design: dict, study_uid: str):
         approval_response = await create_study_objective_approvals(template_uid)  # noqa: F841
         # print(approval_response.get("uid"))
 
-        is_primary = (
-            obj.get("level", {}).get("decode", "").lower() == "primary objective"
-        )
-        level_uid = "C85826_OBJPRIM" if is_primary else "C85827_OBJSEC"
+        async with httpx.AsyncClient() as client:
+            response = await client.get(
+                f"{settings.osb_base_url}/ct/terms?codelist_uid=CTCodelist_000003&page_number=1&page_size=1000"
+            )
+            for item in response.json().get("items", []):
+                if (
+                    item.get("name", {}).get("sponsor_preferred_name", "").lower()
+                    == obj.get("level", {}).get("decode", "").lower()
+                ):
+                    level_uid = item.get("term_uid")
+                    break
 
         create_response = await create_study_objective_create_objective(  # noqa: F841
             study_uid=study_uid, uid=template_uid, objective_level_uid=level_uid
@@ -68,12 +75,17 @@ async def create_study_objective_endpoint(study_design: dict, study_uid: str):
                 endpoint_template_uid
             )  # noqa: F841
 
-            is_primary_endpoint = (
-                obj_end.get("level", {}).get("decode", "").lower() == "primary endpoint"
-            )
-            endpoint_level_uid = (
-                "C98772_OUTMSPRI" if is_primary_endpoint else "C98781_OUTMSSEC"
-            )
+            async with httpx.AsyncClient() as client:
+                response = await client.get(
+                    f"{settings.osb_base_url}/ct/terms?codelist_uid=CTCodelist_000004&page_number=1&page_size=1000"
+                )
+                for item in response.json().get("items", []):
+                    if (
+                        item.get("name", {}).get("sponsor_preferred_name", "").lower()
+                        == obj_end.get("level", {}).get("decode", "").lower()
+                    ):
+                        endpoint_level_uid = item.get("term_uid")
+                        break
 
             create_response = await create_study_endpoint_create_objective(  # noqa: F841
                 study_uid=study_uid,

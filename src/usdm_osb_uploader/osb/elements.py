@@ -1,3 +1,6 @@
+import httpx
+
+from ..settings import settings
 from .osb_api import create_study_structure_study_element
 
 
@@ -15,21 +18,34 @@ async def create_study_element(study_designs: list, study_uid: str):
         )
         description = elem.get("description", "")
 
-        if "screening" in label:
+        if label in [
+            "screening",
+            "check in",
+            "check-in",
+            "run-in",
+            "run in",
+            "follow-up",
+            "follow up",
+            "wash out",
+            "wash-out",
+        ]:
             code = "CTTerm_000143"
-            subtype_uid = "CTTerm_000150"
-        elif "check in" in label or "run-in" in label:
-            code = "CTTerm_000143"
-            subtype_uid = "CTTerm_000148"
-        elif "follow up" in label or "follow-up" in label:
-            code = "CTTerm_000143"
-            subtype_uid = "CTTerm_000149"
-        elif "wash out" in label or "wash-out" in label:
-            code = "CTTerm_000143"
-            subtype_uid = "CTTerm_000149"
         else:
             code = "CTTerm_000144"
-            subtype_uid = "CTTerm_000147"
+
+        async with httpx.AsyncClient() as client:
+            response = await client.get(
+                f"{settings.osb_base_url}/ct/terms?codelist_uid=CTCodelist_000025&page_number=1&page_size=1000"
+            )
+            for item in response.json().get("items", []):
+                if (
+                    item.get("name", {}).get("sponsor_preferred_name", "").lower()
+                    == label
+                ):
+                    subtype_uid = item.get("term_uid")
+                    break
+                else:
+                    subtype_uid = "CTTerm_000147"  # Default to "Other"
 
         element_name = name if len(name) > 3 else elem.get("label", "")
 
