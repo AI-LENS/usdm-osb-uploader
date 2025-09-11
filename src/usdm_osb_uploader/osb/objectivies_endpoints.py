@@ -82,3 +82,4 @@ async def create_study_objective_endpoint(study_design: dict, study_uid: str):
                 endpoint_level_uid=endpoint_level_uid,
                 endpoint_sublevel_uid=None,
             )
+    print("Study objectives and endpoints created successfully.")

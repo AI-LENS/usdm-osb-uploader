@@ -133,3 +133,4 @@ async def create_study_population(study_designs: list, study_uid: str):
         relapse_criteria_null_value_code={"term_uid": ""},
         number_of_expected_subjects=number_of_expected_subjects,
     )
+    print("Study populations created successfully.")

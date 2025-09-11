@@ -30,7 +30,7 @@ async def create_study_criteria(study_version: list, study_uid: str):
 
         template_response = await create_study_criteria_inclusion_criteria_templates(
             study_uid=study_uid,
-            name=plain_text.replace("[", "(").replace("]", ")"),
+            name=plain_text.replace("[", "(").replace("]", ")")[:200],
             library_name="User Defined",
             type_uid=type_uid,
         )
@@ -58,3 +58,4 @@ async def create_study_criteria(study_version: list, study_uid: str):
         create_response = await create_study_criteria_inclusion_create_criteria(  # noqa: F841
             study_uid=study_uid, uid=template_uid, parameter_terms=[]
         )
+    print("Study criteria created successfully.")

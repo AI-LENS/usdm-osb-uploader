@@ -263,7 +263,6 @@ async def create_study_activity(version: list, study_uid: str, study_number: str
                     else:
                         tbd_name = f"TBD_{study_number}"
                         group_id = await get_or_create_group(tbd_name)
-                        print("line 1069", group_id)
                         subgroup_id = await get_or_create_subgroup(
                             subgroup_name=tbd_name, group_uid=group_id
                         )
@@ -296,3 +295,4 @@ async def create_study_activity(version: list, study_uid: str, study_number: str
                                     activity_uid=match.get("uid"),
                                     posted_uids=posted_uids,
                                 )
+    print("Study activities created successfully.")

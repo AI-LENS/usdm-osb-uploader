@@ -311,9 +311,6 @@ async def create_study_population_api(
 async def create_study_criteria_inclusion_criteria_templates(
     study_uid: str, name: str, library_name: str, type_uid: str
 ):  # criteria_preinstance
-    print(
-        f"Creating criteria template: {name}, Type UID: {type_uid}, Study UID: {study_uid}"
-    )
     endpoint = f"{settings.osb_base_url}/criteria-templates"
     req_body = {
         "name": name,

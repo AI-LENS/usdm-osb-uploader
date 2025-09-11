@@ -36,3 +36,4 @@ async def create_study_arm(study_designs: list, study_uid: str):
                                 code=arm.get("name", ""),
                                 description=arm.get("description", ""),
                             )
+    print("Study arms created successfully.")

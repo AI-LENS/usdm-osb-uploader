@@ -18,6 +18,7 @@ async def create_study_id(usdm_data: dict) -> dict:
 
     if response:
         study_uid = response["uid"]
+        print(f"Study created with UID: {study_uid}")
         return study_uid, f"999-{current_study_number}"
     else:
         print("Failed to create study")

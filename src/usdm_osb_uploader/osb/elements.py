@@ -45,3 +45,4 @@ async def create_study_element(study_designs: list, study_uid: str):
             short_name=element_name,
             description=description,
         )
+    print("Study elements created successfully.")

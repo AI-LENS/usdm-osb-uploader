@@ -82,5 +82,6 @@ async def create_study_high_level_design(study_designs: list, study_uid: str):
         phase_type_code=trial_phase_code,
         trial_type_codes=trial_type_codes,
     )
+    print("Study high level design created successfully.")
 
     return response
