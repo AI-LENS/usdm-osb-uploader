@@ -39,10 +39,6 @@ uv run osb usdm-osb-uploader .\dump\CDISC_Pilot_Study.json
 ```
 Replace the JSON file path with your study file as needed.
 
-## License
-
-![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg) 
-
 ## Contributing
 
 Contributions are welcome! Please feel free to submit a Pull Request.
