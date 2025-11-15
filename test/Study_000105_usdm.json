@@ -1,0 +1,3144 @@
+{
+  "study": {
+    "id": "43cbdd6d-3f90-446e-8d5a-f7b34e580ad8",
+    "name": "999-3101",
+    "description": null,
+    "label": null,
+    "versions": [
+      {
+        "id": "StudyVersion_1",
+        "extensionAttributes": [],
+        "versionIdentifier": "None",
+        "rationale": "",
+        "documentVersionIds": [],
+        "dateValues": [],
+        "amendments": [],
+        "businessTherapeuticAreas": [],
+        "studyIdentifiers": [],
+        "referenceIdentifiers": [],
+        "studyDesigns": [
+          {
+            "id": "StudyDesign_1",
+            "extensionAttributes": [],
+            "name": "Study Design  1",
+            "label": null,
+            "description": "The main design for the study",
+            "studyType": {
+              "id": "Code_4",
+              "extensionAttributes": [],
+              "code": "C98388",
+              "codeSystem": "CDISC",
+              "codeSystemVersion": "2025-11-14",
+              "decode": "Interventional Study",
+              "instanceType": "Code"
+            },
+            "studyPhase": {
+              "id": "AliasCode_3",
+              "extensionAttributes": [],
+              "standardCode": {
+                "id": "Code_5",
+                "extensionAttributes": [],
+                "code": "C15601",
+                "codeSystem": "CDISC",
+                "codeSystemVersion": "2025-11-14",
+                "decode": "Phase II Trial",
+                "instanceType": "Code"
+              },
+              "standardCodeAliases": [],
+              "instanceType": "AliasCode"
+            },
+            "therapeuticAreas": [
+              {
+                "id": "Code_6",
+                "extensionAttributes": [],
+                "code": "DictionaryTerm_000004",
+                "codeSystem": "SNOMED",
+                "codeSystemVersion": "2025-11-14",
+                "decode": "Alzheimer's disease",
+                "instanceType": "Code"
+              }
+            ],
+            "characteristics": [],
+            "encounters": [
+              {
+                "id": "Encounter_1",
+                "extensionAttributes": [],
+                "name": "O1",
+                "label": "Visit 1",
+                "description": "Screening encounter",
+                "type": {
+                  "id": "Code_14",
+                  "extensionAttributes": [],
+                  "code": "CTTerm_000185",
+                  "codeSystem": "Sponsor",
+                  "codeSystemVersion": "2025-11-14",
+                  "decode": "UNK",
+                  "instanceType": "Code"
+                },
+                "previousId": null,
+                "nextId": "Encounter_2",
+                "scheduledAtId": "Timing_1",
+                "environmentalSettings": [],
+                "contactModes": [
+                  {
+                    "id": "Code_15",
+                    "extensionAttributes": [],
+                    "code": "CTTerm_000082",
+                    "codeSystem": "Sponsor",
+                    "codeSystemVersion": "2025-11-14",
+                    "decode": "UNK",
+                    "instanceType": "Code"
+                  }
+                ],
+                "transitionStartRule": {
+                  "id": "TransitionRule_1",
+                  "extensionAttributes": [],
+                  "name": "Transition Start Rule",
+                  "label": null,
+                  "description": null,
+                  "text": "",
+                  "instanceType": "TransitionRule"
+                },
+                "transitionEndRule": {
+                  "id": "TransitionRule_2",
+                  "extensionAttributes": [],
+                  "name": "Transition End Rule",
+                  "label": null,
+                  "description": null,
+                  "text": "",
+                  "instanceType": "TransitionRule"
+                },
+                "notes": [],
+                "instanceType": "Encounter"
+              },
+              {
+                "id": "Encounter_2",
+                "extensionAttributes": [],
+                "name": "O2",
+                "label": "Visit 2",
+                "description": "Screening encounter - Ambulatory ECG Placement",
+                "type": {
+                  "id": "Code_14",
+                  "extensionAttributes": [],
+                  "code": "CTTerm_000185",
+                  "codeSystem": "Sponsor",
+                  "codeSystemVersion": "2025-11-14",
+                  "decode": "UNK",
+                  "instanceType": "Code"
+                },
+                "previousId": "Encounter_1",
+                "nextId": "Encounter_3",
+                "scheduledAtId": "Timing_2",
+                "environmentalSettings": [],
+                "contactModes": [
+                  {
+                    "id": "Code_15",
+                    "extensionAttributes": [],
+                    "code": "CTTerm_000082",
+                    "codeSystem": "Sponsor",
+                    "codeSystemVersion": "2025-11-14",
+                    "decode": "UNK",
+                    "instanceType": "Code"
+                  }
+                ],
+                "transitionStartRule": {
+                  "id": "TransitionRule_3",
+                  "extensionAttributes": [],
+                  "name": "Transition Start Rule",
+                  "label": null,
+                  "description": null,
+                  "text": "",
+                  "instanceType": "TransitionRule"
+                },
+                "transitionEndRule": {
+                  "id": "TransitionRule_4",
+                  "extensionAttributes": [],
+                  "name": "Transition End Rule",
+                  "label": null,
+                  "description": null,
+                  "text": "",
+                  "instanceType": "TransitionRule"
+                },
+                "notes": [],
+                "instanceType": "Encounter"
+              },
+              {
+                "id": "Encounter_3",
+                "extensionAttributes": [],
+                "name": "O3",
+                "label": "Visit 3",
+                "description": "Baseline encounter - Ambulatory ECG Removal",
+                "type": {
+                  "id": "Code_16",
+                  "extensionAttributes": [],
+                  "code": "CTTerm_000190",
+                  "codeSystem": "Sponsor",
+                  "codeSystemVersion": "2025-11-14",
+                  "decode": "UNK",
+                  "instanceType": "Code"
+                },
+                "previousId": "Encounter_2",
+                "nextId": "Encounter_4",
+                "scheduledAtId": "Timing_3",
+                "environmentalSettings": [],
+                "contactModes": [
+                  {
+                    "id": "Code_15",
+                    "extensionAttributes": [],
+                    "code": "CTTerm_000082",
+                    "codeSystem": "Sponsor",
+                    "codeSystemVersion": "2025-11-14",
+                    "decode": "UNK",
+                    "instanceType": "Code"
+                  }
+                ],
+                "transitionStartRule": {
+                  "id": "TransitionRule_5",
+                  "extensionAttributes": [],
+                  "name": "Transition Start Rule",
+                  "label": null,
+                  "description": null,
+                  "text": "",
+                  "instanceType": "TransitionRule"
+                },
+                "transitionEndRule": {
+                  "id": "TransitionRule_6",
+                  "extensionAttributes": [],
+                  "name": "Transition End Rule",
+                  "label": null,
+                  "description": null,
+                  "text": "",
+                  "instanceType": "TransitionRule"
+                },
+                "notes": [],
+                "instanceType": "Encounter"
+              },
+              {
+                "id": "Encounter_4",
+                "extensionAttributes": [],
+                "name": "O4",
+                "label": "Visit 4",
+                "description": "Day 14",
+                "type": {
+                  "id": "Code_16",
+                  "extensionAttributes": [],
+                  "code": "CTTerm_000190",
+                  "codeSystem": "Sponsor",
+                  "codeSystemVersion": "2025-11-14",
+                  "decode": "UNK",
+                  "instanceType": "Code"
+                },
+                "previousId": "Encounter_3",
+                "nextId": "Encounter_5",
+                "scheduledAtId": "Timing_4",
+                "environmentalSettings": [],
+                "contactModes": [
+                  {
+                    "id": "Code_15",
+                    "extensionAttributes": [],
+                    "code": "CTTerm_000082",
+                    "codeSystem": "Sponsor",
+                    "codeSystemVersion": "2025-11-14",
+                    "decode": "UNK",
+                    "instanceType": "Code"
+                  }
+                ],
+                "transitionStartRule": {
+                  "id": "TransitionRule_7",
+                  "extensionAttributes": [],
+                  "name": "Transition Start Rule",
+                  "label": null,
+                  "description": null,
+                  "text": "",
+                  "instanceType": "TransitionRule"
+                },
+                "transitionEndRule": {
+                  "id": "TransitionRule_8",
+                  "extensionAttributes": [],
+                  "name": "Transition End Rule",
+                  "label": null,
+                  "description": null,
+                  "text": "",
+                  "instanceType": "TransitionRule"
+                },
+                "notes": [],
+                "instanceType": "Encounter"
+              },
+              {
+                "id": "Encounter_5",
+                "extensionAttributes": [],
+                "name": "O5",
+                "label": "Visit 5",
+                "description": "Day 28",
+                "type": {
+                  "id": "Code_16",
+                  "extensionAttributes": [],
+                  "code": "CTTerm_000190",
+                  "codeSystem": "Sponsor",
+                  "codeSystemVersion": "2025-11-14",
+                  "decode": "UNK",
+                  "instanceType": "Code"
+                },
+                "previousId": "Encounter_4",
+                "nextId": "Encounter_6",
+                "scheduledAtId": "Timing_5",
+                "environmentalSettings": [],
+                "contactModes": [
+                  {
+                    "id": "Code_15",
+                    "extensionAttributes": [],
+                    "code": "CTTerm_000082",
+                    "codeSystem": "Sponsor",
+                    "codeSystemVersion": "2025-11-14",
+                    "decode": "UNK",
+                    "instanceType": "Code"
+                  }
+                ],
+                "transitionStartRule": {
+                  "id": "TransitionRule_9",
+                  "extensionAttributes": [],
+                  "name": "Transition Start Rule",
+                  "label": null,
+                  "description": null,
+                  "text": "",
+                  "instanceType": "TransitionRule"
+                },
+                "transitionEndRule": {
+                  "id": "TransitionRule_10",
+                  "extensionAttributes": [],
+                  "name": "Transition End Rule",
+                  "label": null,
+                  "description": null,
+                  "text": "",
+                  "instanceType": "TransitionRule"
+                },
+                "notes": [],
+                "instanceType": "Encounter"
+              },
+              {
+                "id": "Encounter_6",
+                "extensionAttributes": [],
+                "name": "O6",
+                "label": "Visit 6",
+                "description": "Day 42",
+                "type": {
+                  "id": "Code_16",
+                  "extensionAttributes": [],
+                  "code": "CTTerm_000190",
+                  "codeSystem": "Sponsor",
+                  "codeSystemVersion": "2025-11-14",
+                  "decode": "UNK",
+                  "instanceType": "Code"
+                },
+                "previousId": "Encounter_5",
+                "nextId": null,
+                "scheduledAtId": "Timing_6",
+                "environmentalSettings": [],
+                "contactModes": [
+                  {
+                    "id": "Code_15",
+                    "extensionAttributes": [],
+                    "code": "CTTerm_000082",
+                    "codeSystem": "Sponsor",
+                    "codeSystemVersion": "2025-11-14",
+                    "decode": "UNK",
+                    "instanceType": "Code"
+                  }
+                ],
+                "transitionStartRule": {
+                  "id": "TransitionRule_11",
+                  "extensionAttributes": [],
+                  "name": "Transition Start Rule",
+                  "label": null,
+                  "description": null,
+                  "text": "",
+                  "instanceType": "TransitionRule"
+                },
+                "transitionEndRule": {
+                  "id": "TransitionRule_12",
+                  "extensionAttributes": [],
+                  "name": "Transition End Rule",
+                  "label": null,
+                  "description": null,
+                  "text": "",
+                  "instanceType": "TransitionRule"
+                },
+                "notes": [],
+                "instanceType": "Encounter"
+              }
+            ],
+            "activities": [
+              {
+                "id": "Activity_1",
+                "extensionAttributes": [],
+                "name": "Informed Consent",
+                "label": null,
+                "description": null,
+                "previousId": null,
+                "nextId": null,
+                "childIds": [],
+                "definedProcedures": [
+                  {
+                    "id": "Procedure_1",
+                    "extensionAttributes": [],
+                    "name": "Informed consent",
+                    "label": null,
+                    "description": null,
+                    "procedureType": "",
+                    "code": {
+                      "id": "Code_1",
+                      "extensionAttributes": [],
+                      "code": "",
+                      "codeSystem": "",
+                      "codeSystemVersion": "",
+                      "decode": "",
+                      "instanceType": "Code"
+                    },
+                    "studyInterventionId": null,
+                    "notes": [],
+                    "instanceType": "Procedure"
+                  }
+                ],
+                "biomedicalConceptIds": [],
+                "bcCategoryIds": [],
+                "bcSurrogateIds": [],
+                "timelineId": null,
+                "notes": [],
+                "instanceType": "Activity"
+              },
+              {
+                "id": "Activity_2",
+                "extensionAttributes": [],
+                "name": "Eligibility Criteria",
+                "label": null,
+                "description": null,
+                "previousId": null,
+                "nextId": null,
+                "childIds": [],
+                "definedProcedures": [
+                  {
+                    "id": "Procedure_2",
+                    "extensionAttributes": [],
+                    "name": "Inclusion/Exclusion Criteria",
+                    "label": null,
+                    "description": null,
+                    "procedureType": "",
+                    "code": {
+                      "id": "Code_1",
+                      "extensionAttributes": [],
+                      "code": "",
+                      "codeSystem": "",
+                      "codeSystemVersion": "",
+                      "decode": "",
+                      "instanceType": "Code"
+                    },
+                    "studyInterventionId": null,
+                    "notes": [],
+                    "instanceType": "Procedure"
+                  }
+                ],
+                "biomedicalConceptIds": [],
+                "bcCategoryIds": [],
+                "bcSurrogateIds": [],
+                "timelineId": null,
+                "notes": [],
+                "instanceType": "Activity"
+              },
+              {
+                "id": "Activity_3",
+                "extensionAttributes": [],
+                "name": "Eligibility Criteria",
+                "label": null,
+                "description": null,
+                "previousId": null,
+                "nextId": null,
+                "childIds": [],
+                "definedProcedures": [
+                  {
+                    "id": "Procedure_3",
+                    "extensionAttributes": [],
+                    "name": "Hachinski \u22644",
+                    "label": null,
+                    "description": null,
+                    "procedureType": "",
+                    "code": {
+                      "id": "Code_1",
+                      "extensionAttributes": [],
+                      "code": "",
+                      "codeSystem": "",
+                      "codeSystemVersion": "",
+                      "decode": "",
+                      "instanceType": "Code"
+                    },
+                    "studyInterventionId": null,
+                    "notes": [],
+                    "instanceType": "Procedure"
+                  }
+                ],
+                "biomedicalConceptIds": [],
+                "bcCategoryIds": [],
+                "bcSurrogateIds": [],
+                "timelineId": null,
+                "notes": [],
+                "instanceType": "Activity"
+              },
+              {
+                "id": "Activity_4",
+                "extensionAttributes": [],
+                "name": "Informed Consent and Demography",
+                "label": null,
+                "description": null,
+                "previousId": null,
+                "nextId": null,
+                "childIds": [],
+                "definedProcedures": [
+                  {
+                    "id": "Procedure_4",
+                    "extensionAttributes": [],
+                    "name": "Patient number assigned",
+                    "label": null,
+                    "description": null,
+                    "procedureType": "",
+                    "code": {
+                      "id": "Code_1",
+                      "extensionAttributes": [],
+                      "code": "",
+                      "codeSystem": "",
+                      "codeSystemVersion": "",
+                      "decode": "",
+                      "instanceType": "Code"
+                    },
+                    "studyInterventionId": null,
+                    "notes": [],
+                    "instanceType": "Procedure"
+                  }
+                ],
+                "biomedicalConceptIds": [],
+                "bcCategoryIds": [],
+                "bcSurrogateIds": [],
+                "timelineId": null,
+                "notes": [],
+                "instanceType": "Activity"
+              },
+              {
+                "id": "Activity_5",
+                "extensionAttributes": [],
+                "name": "Pain Rating",
+                "label": null,
+                "description": null,
+                "previousId": null,
+                "nextId": null,
+                "childIds": [],
+                "definedProcedures": [
+                  {
+                    "id": "Procedure_5",
+                    "extensionAttributes": [],
+                    "name": "MMSE",
+                    "label": null,
+                    "description": null,
+                    "procedureType": "",
+                    "code": {
+                      "id": "Code_1",
+                      "extensionAttributes": [],
+                      "code": "",
+                      "codeSystem": "",
+                      "codeSystemVersion": "",
+                      "decode": "",
+                      "instanceType": "Code"
+                    },
+                    "studyInterventionId": null,
+                    "notes": [],
+                    "instanceType": "Procedure"
+                  }
+                ],
+                "biomedicalConceptIds": [],
+                "bcCategoryIds": [],
+                "bcSurrogateIds": [],
+                "timelineId": null,
+                "notes": [],
+                "instanceType": "Activity"
+              },
+              {
+                "id": "Activity_6",
+                "extensionAttributes": [],
+                "name": "Pain Rating",
+                "label": null,
+                "description": null,
+                "previousId": null,
+                "nextId": null,
+                "childIds": [],
+                "definedProcedures": [
+                  {
+                    "id": "Procedure_6",
+                    "extensionAttributes": [],
+                    "name": "ADAS-Cog",
+                    "label": null,
+                    "description": null,
+                    "procedureType": "",
+                    "code": {
+                      "id": "Code_1",
+                      "extensionAttributes": [],
+                      "code": "",
+                      "codeSystem": "",
+                      "codeSystemVersion": "",
+                      "decode": "",
+                      "instanceType": "Code"
+                    },
+                    "studyInterventionId": null,
+                    "notes": [],
+                    "instanceType": "Procedure"
+                  }
+                ],
+                "biomedicalConceptIds": [],
+                "bcCategoryIds": [],
+                "bcSurrogateIds": [],
+                "timelineId": null,
+                "notes": [],
+                "instanceType": "Activity"
+              },
+              {
+                "id": "Activity_7",
+                "extensionAttributes": [],
+                "name": "Pain Rating",
+                "label": null,
+                "description": null,
+                "previousId": null,
+                "nextId": null,
+                "childIds": [],
+                "definedProcedures": [
+                  {
+                    "id": "Procedure_7",
+                    "extensionAttributes": [],
+                    "name": "CIBIC+",
+                    "label": null,
+                    "description": null,
+                    "procedureType": "",
+                    "code": {
+                      "id": "Code_1",
+                      "extensionAttributes": [],
+                      "code": "",
+                      "codeSystem": "",
+                      "codeSystemVersion": "",
+                      "decode": "",
+                      "instanceType": "Code"
+                    },
+                    "studyInterventionId": null,
+                    "notes": [],
+                    "instanceType": "Procedure"
+                  }
+                ],
+                "biomedicalConceptIds": [],
+                "bcCategoryIds": [],
+                "bcSurrogateIds": [],
+                "timelineId": null,
+                "notes": [],
+                "instanceType": "Activity"
+              },
+              {
+                "id": "Activity_8",
+                "extensionAttributes": [],
+                "name": "Pain Rating",
+                "label": null,
+                "description": null,
+                "previousId": null,
+                "nextId": null,
+                "childIds": [],
+                "definedProcedures": [
+                  {
+                    "id": "Procedure_8",
+                    "extensionAttributes": [],
+                    "name": "DAD",
+                    "label": null,
+                    "description": null,
+                    "procedureType": "",
+                    "code": {
+                      "id": "Code_1",
+                      "extensionAttributes": [],
+                      "code": "",
+                      "codeSystem": "",
+                      "codeSystemVersion": "",
+                      "decode": "",
+                      "instanceType": "Code"
+                    },
+                    "studyInterventionId": null,
+                    "notes": [],
+                    "instanceType": "Procedure"
+                  }
+                ],
+                "biomedicalConceptIds": [],
+                "bcCategoryIds": [],
+                "bcSurrogateIds": [],
+                "timelineId": null,
+                "notes": [],
+                "instanceType": "Activity"
+              },
+              {
+                "id": "Activity_9",
+                "extensionAttributes": [],
+                "name": "Pain Rating",
+                "label": null,
+                "description": null,
+                "previousId": null,
+                "nextId": null,
+                "childIds": [],
+                "definedProcedures": [
+                  {
+                    "id": "Procedure_9",
+                    "extensionAttributes": [],
+                    "name": "NPI-X",
+                    "label": null,
+                    "description": null,
+                    "procedureType": "",
+                    "code": {
+                      "id": "Code_1",
+                      "extensionAttributes": [],
+                      "code": "",
+                      "codeSystem": "",
+                      "codeSystemVersion": "",
+                      "decode": "",
+                      "instanceType": "Code"
+                    },
+                    "studyInterventionId": null,
+                    "notes": [],
+                    "instanceType": "Procedure"
+                  }
+                ],
+                "biomedicalConceptIds": [],
+                "bcCategoryIds": [],
+                "bcSurrogateIds": [],
+                "timelineId": null,
+                "notes": [],
+                "instanceType": "Activity"
+              },
+              {
+                "id": "Activity_10",
+                "extensionAttributes": [],
+                "name": "Treadmill Test",
+                "label": null,
+                "description": null,
+                "previousId": null,
+                "nextId": null,
+                "childIds": [],
+                "definedProcedures": [
+                  {
+                    "id": "Procedure_10",
+                    "extensionAttributes": [],
+                    "name": "Placebo TTS test",
+                    "label": null,
+                    "description": null,
+                    "procedureType": "",
+                    "code": {
+                      "id": "Code_1",
+                      "extensionAttributes": [],
+                      "code": "",
+                      "codeSystem": "",
+                      "codeSystemVersion": "",
+                      "decode": "",
+                      "instanceType": "Code"
+                    },
+                    "studyInterventionId": null,
+                    "notes": [],
+                    "instanceType": "Procedure"
+                  }
+                ],
+                "biomedicalConceptIds": [],
+                "bcCategoryIds": [],
+                "bcSurrogateIds": [],
+                "timelineId": null,
+                "notes": [],
+                "instanceType": "Activity"
+              },
+              {
+                "id": "Activity_11",
+                "extensionAttributes": [],
+                "name": "Subgroup 47 updated updated updated updated updated",
+                "label": null,
+                "description": null,
+                "previousId": null,
+                "nextId": null,
+                "childIds": [],
+                "definedProcedures": [
+                  {
+                    "id": "Procedure_11",
+                    "extensionAttributes": [],
+                    "name": "TTS Acceptability Survey",
+                    "label": null,
+                    "description": null,
+                    "procedureType": "",
+                    "code": {
+                      "id": "Code_1",
+                      "extensionAttributes": [],
+                      "code": "",
+                      "codeSystem": "",
+                      "codeSystemVersion": "",
+                      "decode": "",
+                      "instanceType": "Code"
+                    },
+                    "studyInterventionId": null,
+                    "notes": [],
+                    "instanceType": "Procedure"
+                  }
+                ],
+                "biomedicalConceptIds": [],
+                "bcCategoryIds": [],
+                "bcSurrogateIds": [],
+                "timelineId": null,
+                "notes": [],
+                "instanceType": "Activity"
+              },
+              {
+                "id": "Activity_12",
+                "extensionAttributes": [],
+                "name": "Physical Examination - early ph1",
+                "label": null,
+                "description": null,
+                "previousId": null,
+                "nextId": null,
+                "childIds": [],
+                "definedProcedures": [
+                  {
+                    "id": "Procedure_12",
+                    "extensionAttributes": [],
+                    "name": "Physical examination",
+                    "label": null,
+                    "description": null,
+                    "procedureType": "",
+                    "code": {
+                      "id": "Code_1",
+                      "extensionAttributes": [],
+                      "code": "",
+                      "codeSystem": "",
+                      "codeSystemVersion": "",
+                      "decode": "",
+                      "instanceType": "Code"
+                    },
+                    "studyInterventionId": null,
+                    "notes": [],
+                    "instanceType": "Procedure"
+                  }
+                ],
+                "biomedicalConceptIds": [],
+                "bcCategoryIds": [],
+                "bcSurrogateIds": [],
+                "timelineId": null,
+                "notes": [],
+                "instanceType": "Activity"
+              },
+              {
+                "id": "Activity_13",
+                "extensionAttributes": [],
+                "name": "Subgroup 50 updated",
+                "label": null,
+                "description": null,
+                "previousId": null,
+                "nextId": null,
+                "childIds": [],
+                "definedProcedures": [
+                  {
+                    "id": "Procedure_13",
+                    "extensionAttributes": [],
+                    "name": "CT Scan",
+                    "label": null,
+                    "description": null,
+                    "procedureType": "",
+                    "code": {
+                      "id": "Code_1",
+                      "extensionAttributes": [],
+                      "code": "",
+                      "codeSystem": "",
+                      "codeSystemVersion": "",
+                      "decode": "",
+                      "instanceType": "Code"
+                    },
+                    "studyInterventionId": null,
+                    "notes": [],
+                    "instanceType": "Procedure"
+                  }
+                ],
+                "biomedicalConceptIds": [],
+                "bcCategoryIds": [],
+                "bcSurrogateIds": [],
+                "timelineId": null,
+                "notes": [],
+                "instanceType": "Activity"
+              },
+              {
+                "id": "Activity_14",
+                "extensionAttributes": [],
+                "name": "Medical History/Concomitant Illness",
+                "label": null,
+                "description": null,
+                "previousId": null,
+                "nextId": null,
+                "childIds": [],
+                "definedProcedures": [
+                  {
+                    "id": "Procedure_14",
+                    "extensionAttributes": [],
+                    "name": "Medical History",
+                    "label": null,
+                    "description": null,
+                    "procedureType": "",
+                    "code": {
+                      "id": "Code_1",
+                      "extensionAttributes": [],
+                      "code": "",
+                      "codeSystem": "",
+                      "codeSystemVersion": "",
+                      "decode": "",
+                      "instanceType": "Code"
+                    },
+                    "studyInterventionId": null,
+                    "notes": [],
+                    "instanceType": "Procedure"
+                  }
+                ],
+                "biomedicalConceptIds": [],
+                "bcCategoryIds": [],
+                "bcSurrogateIds": [],
+                "timelineId": null,
+                "notes": [],
+                "instanceType": "Activity"
+              },
+              {
+                "id": "Activity_15",
+                "extensionAttributes": [],
+                "name": "Medical History/Concomitant Illness",
+                "label": null,
+                "description": null,
+                "previousId": null,
+                "nextId": null,
+                "childIds": [],
+                "definedProcedures": [
+                  {
+                    "id": "Procedure_15",
+                    "extensionAttributes": [],
+                    "name": "Concomitant Medications",
+                    "label": null,
+                    "description": null,
+                    "procedureType": "",
+                    "code": {
+                      "id": "Code_1",
+                      "extensionAttributes": [],
+                      "code": "",
+                      "codeSystem": "",
+                      "codeSystemVersion": "",
+                      "decode": "",
+                      "instanceType": "Code"
+                    },
+                    "studyInterventionId": null,
+                    "notes": [],
+                    "instanceType": "Procedure"
+                  }
+                ],
+                "biomedicalConceptIds": [],
+                "bcCategoryIds": [],
+                "bcSurrogateIds": [],
+                "timelineId": null,
+                "notes": [],
+                "instanceType": "Activity"
+              },
+              {
+                "id": "Activity_16",
+                "extensionAttributes": [],
+                "name": "Demography",
+                "label": null,
+                "description": null,
+                "previousId": null,
+                "nextId": null,
+                "childIds": [],
+                "definedProcedures": [
+                  {
+                    "id": "Procedure_16",
+                    "extensionAttributes": [],
+                    "name": "Habits",
+                    "label": null,
+                    "description": null,
+                    "procedureType": "",
+                    "code": {
+                      "id": "Code_1",
+                      "extensionAttributes": [],
+                      "code": "",
+                      "codeSystem": "",
+                      "codeSystemVersion": "",
+                      "decode": "",
+                      "instanceType": "Code"
+                    },
+                    "studyInterventionId": null,
+                    "notes": [],
+                    "instanceType": "Procedure"
+                  }
+                ],
+                "biomedicalConceptIds": [],
+                "bcCategoryIds": [],
+                "bcSurrogateIds": [],
+                "timelineId": null,
+                "notes": [],
+                "instanceType": "Activity"
+              },
+              {
+                "id": "Activity_17",
+                "extensionAttributes": [],
+                "name": "Biochemistry",
+                "label": null,
+                "description": null,
+                "previousId": null,
+                "nextId": null,
+                "childIds": [],
+                "definedProcedures": [
+                  {
+                    "id": "Procedure_17",
+                    "extensionAttributes": [],
+                    "name": "Chest x-ray",
+                    "label": null,
+                    "description": null,
+                    "procedureType": "",
+                    "code": {
+                      "id": "Code_1",
+                      "extensionAttributes": [],
+                      "code": "",
+                      "codeSystem": "",
+                      "codeSystemVersion": "",
+                      "decode": "",
+                      "instanceType": "Code"
+                    },
+                    "studyInterventionId": null,
+                    "notes": [],
+                    "instanceType": "Procedure"
+                  }
+                ],
+                "biomedicalConceptIds": [],
+                "bcCategoryIds": [],
+                "bcSurrogateIds": [],
+                "timelineId": null,
+                "notes": [],
+                "instanceType": "Activity"
+              },
+              {
+                "id": "Activity_18",
+                "extensionAttributes": [],
+                "name": "Biochemistry",
+                "label": null,
+                "description": null,
+                "previousId": null,
+                "nextId": null,
+                "childIds": [],
+                "definedProcedures": [
+                  {
+                    "id": "Procedure_18",
+                    "extensionAttributes": [],
+                    "name": "Alanine Aminotransferase",
+                    "label": null,
+                    "description": null,
+                    "procedureType": "",
+                    "code": {
+                      "id": "Code_1",
+                      "extensionAttributes": [],
+                      "code": "",
+                      "codeSystem": "",
+                      "codeSystemVersion": "",
+                      "decode": "",
+                      "instanceType": "Code"
+                    },
+                    "studyInterventionId": null,
+                    "notes": [],
+                    "instanceType": "Procedure"
+                  }
+                ],
+                "biomedicalConceptIds": [],
+                "bcCategoryIds": [],
+                "bcSurrogateIds": [],
+                "timelineId": null,
+                "notes": [],
+                "instanceType": "Activity"
+              },
+              {
+                "id": "Activity_19",
+                "extensionAttributes": [],
+                "name": "Biochemistry",
+                "label": null,
+                "description": null,
+                "previousId": null,
+                "nextId": null,
+                "childIds": [],
+                "definedProcedures": [
+                  {
+                    "id": "Procedure_19",
+                    "extensionAttributes": [],
+                    "name": "Albumin",
+                    "label": null,
+                    "description": null,
+                    "procedureType": "",
+                    "code": {
+                      "id": "Code_1",
+                      "extensionAttributes": [],
+                      "code": "",
+                      "codeSystem": "",
+                      "codeSystemVersion": "",
+                      "decode": "",
+                      "instanceType": "Code"
+                    },
+                    "studyInterventionId": null,
+                    "notes": [],
+                    "instanceType": "Procedure"
+                  }
+                ],
+                "biomedicalConceptIds": [],
+                "bcCategoryIds": [],
+                "bcSurrogateIds": [],
+                "timelineId": null,
+                "notes": [],
+                "instanceType": "Activity"
+              },
+              {
+                "id": "Activity_20",
+                "extensionAttributes": [],
+                "name": "Biochemistry",
+                "label": null,
+                "description": null,
+                "previousId": null,
+                "nextId": null,
+                "childIds": [],
+                "definedProcedures": [
+                  {
+                    "id": "Procedure_20",
+                    "extensionAttributes": [],
+                    "name": "Alkaline Phosphatase",
+                    "label": null,
+                    "description": null,
+                    "procedureType": "",
+                    "code": {
+                      "id": "Code_1",
+                      "extensionAttributes": [],
+                      "code": "",
+                      "codeSystem": "",
+                      "codeSystemVersion": "",
+                      "decode": "",
+                      "instanceType": "Code"
+                    },
+                    "studyInterventionId": null,
+                    "notes": [],
+                    "instanceType": "Procedure"
+                  }
+                ],
+                "biomedicalConceptIds": [],
+                "bcCategoryIds": [],
+                "bcSurrogateIds": [],
+                "timelineId": null,
+                "notes": [],
+                "instanceType": "Activity"
+              },
+              {
+                "id": "Activity_21",
+                "extensionAttributes": [],
+                "name": "Biochemistry",
+                "label": null,
+                "description": null,
+                "previousId": null,
+                "nextId": null,
+                "childIds": [],
+                "definedProcedures": [
+                  {
+                    "id": "Procedure_21",
+                    "extensionAttributes": [],
+                    "name": "Potassium",
+                    "label": null,
+                    "description": null,
+                    "procedureType": "",
+                    "code": {
+                      "id": "Code_1",
+                      "extensionAttributes": [],
+                      "code": "",
+                      "codeSystem": "",
+                      "codeSystemVersion": "",
+                      "decode": "",
+                      "instanceType": "Code"
+                    },
+                    "studyInterventionId": null,
+                    "notes": [],
+                    "instanceType": "Procedure"
+                  }
+                ],
+                "biomedicalConceptIds": [],
+                "bcCategoryIds": [],
+                "bcSurrogateIds": [],
+                "timelineId": null,
+                "notes": [],
+                "instanceType": "Activity"
+              },
+              {
+                "id": "Activity_22",
+                "extensionAttributes": [],
+                "name": "Biochemistry",
+                "label": null,
+                "description": null,
+                "previousId": null,
+                "nextId": null,
+                "childIds": [],
+                "definedProcedures": [
+                  {
+                    "id": "Procedure_22",
+                    "extensionAttributes": [],
+                    "name": "Sodium",
+                    "label": null,
+                    "description": null,
+                    "procedureType": "",
+                    "code": {
+                      "id": "Code_1",
+                      "extensionAttributes": [],
+                      "code": "",
+                      "codeSystem": "",
+                      "codeSystemVersion": "",
+                      "decode": "",
+                      "instanceType": "Code"
+                    },
+                    "studyInterventionId": null,
+                    "notes": [],
+                    "instanceType": "Procedure"
+                  }
+                ],
+                "biomedicalConceptIds": [],
+                "bcCategoryIds": [],
+                "bcSurrogateIds": [],
+                "timelineId": null,
+                "notes": [],
+                "instanceType": "Activity"
+              },
+              {
+                "id": "Activity_23",
+                "extensionAttributes": [],
+                "name": "Coagulation Parameters",
+                "label": null,
+                "description": null,
+                "previousId": null,
+                "nextId": null,
+                "childIds": [],
+                "definedProcedures": [
+                  {
+                    "id": "Procedure_23",
+                    "extensionAttributes": [],
+                    "name": "Apo E genotyping",
+                    "label": null,
+                    "description": null,
+                    "procedureType": "",
+                    "code": {
+                      "id": "Code_1",
+                      "extensionAttributes": [],
+                      "code": "",
+                      "codeSystem": "",
+                      "codeSystemVersion": "",
+                      "decode": "",
+                      "instanceType": "Code"
+                    },
+                    "studyInterventionId": null,
+                    "notes": [],
+                    "instanceType": "Procedure"
+                  }
+                ],
+                "biomedicalConceptIds": [],
+                "bcCategoryIds": [],
+                "bcSurrogateIds": [],
+                "timelineId": null,
+                "notes": [],
+                "instanceType": "Activity"
+              },
+              {
+                "id": "Activity_24",
+                "extensionAttributes": [],
+                "name": "Haematology",
+                "label": null,
+                "description": null,
+                "previousId": null,
+                "nextId": null,
+                "childIds": [],
+                "definedProcedures": [
+                  {
+                    "id": "Procedure_24",
+                    "extensionAttributes": [],
+                    "name": "Hematology",
+                    "label": null,
+                    "description": null,
+                    "procedureType": "",
+                    "code": {
+                      "id": "Code_1",
+                      "extensionAttributes": [],
+                      "code": "",
+                      "codeSystem": "",
+                      "codeSystemVersion": "",
+                      "decode": "",
+                      "instanceType": "Code"
+                    },
+                    "studyInterventionId": null,
+                    "notes": [],
+                    "instanceType": "Procedure"
+                  }
+                ],
+                "biomedicalConceptIds": [],
+                "bcCategoryIds": [],
+                "bcSurrogateIds": [],
+                "timelineId": null,
+                "notes": [],
+                "instanceType": "Activity"
+              },
+              {
+                "id": "Activity_25",
+                "extensionAttributes": [],
+                "name": "Urinalysis",
+                "label": null,
+                "description": null,
+                "previousId": null,
+                "nextId": null,
+                "childIds": [],
+                "definedProcedures": [
+                  {
+                    "id": "Procedure_25",
+                    "extensionAttributes": [],
+                    "name": "Urinalysis",
+                    "label": null,
+                    "description": null,
+                    "procedureType": "",
+                    "code": {
+                      "id": "Code_1",
+                      "extensionAttributes": [],
+                      "code": "",
+                      "codeSystem": "",
+                      "codeSystemVersion": "",
+                      "decode": "",
+                      "instanceType": "Code"
+                    },
+                    "studyInterventionId": null,
+                    "notes": [],
+                    "instanceType": "Procedure"
+                  }
+                ],
+                "biomedicalConceptIds": [],
+                "bcCategoryIds": [],
+                "bcSurrogateIds": [],
+                "timelineId": null,
+                "notes": [],
+                "instanceType": "Activity"
+              },
+              {
+                "id": "Activity_26",
+                "extensionAttributes": [],
+                "name": "Collection of Samples",
+                "label": null,
+                "description": null,
+                "previousId": null,
+                "nextId": null,
+                "childIds": [],
+                "definedProcedures": [
+                  {
+                    "id": "Procedure_26",
+                    "extensionAttributes": [],
+                    "name": "Plasma Specimen (Xanomeline)",
+                    "label": null,
+                    "description": null,
+                    "procedureType": "",
+                    "code": {
+                      "id": "Code_1",
+                      "extensionAttributes": [],
+                      "code": "",
+                      "codeSystem": "",
+                      "codeSystemVersion": "",
+                      "decode": "",
+                      "instanceType": "Code"
+                    },
+                    "studyInterventionId": null,
+                    "notes": [],
+                    "instanceType": "Procedure"
+                  }
+                ],
+                "biomedicalConceptIds": [],
+                "bcCategoryIds": [],
+                "bcSurrogateIds": [],
+                "timelineId": null,
+                "notes": [],
+                "instanceType": "Activity"
+              },
+              {
+                "id": "Activity_27",
+                "extensionAttributes": [],
+                "name": "Glucose Metabolism",
+                "label": null,
+                "description": null,
+                "previousId": null,
+                "nextId": null,
+                "childIds": [],
+                "definedProcedures": [
+                  {
+                    "id": "Procedure_27",
+                    "extensionAttributes": [],
+                    "name": "HbA1c",
+                    "label": null,
+                    "description": null,
+                    "procedureType": "",
+                    "code": {
+                      "id": "Code_1",
+                      "extensionAttributes": [],
+                      "code": "",
+                      "codeSystem": "",
+                      "codeSystemVersion": "",
+                      "decode": "",
+                      "instanceType": "Code"
+                    },
+                    "studyInterventionId": null,
+                    "notes": [],
+                    "instanceType": "Procedure"
+                  }
+                ],
+                "biomedicalConceptIds": [],
+                "bcCategoryIds": [],
+                "bcSurrogateIds": [],
+                "timelineId": null,
+                "notes": [],
+                "instanceType": "Activity"
+              },
+              {
+                "id": "Activity_28",
+                "extensionAttributes": [],
+                "name": "Randomisation",
+                "label": null,
+                "description": null,
+                "previousId": null,
+                "nextId": null,
+                "childIds": [],
+                "definedProcedures": [
+                  {
+                    "id": "Procedure_28",
+                    "extensionAttributes": [],
+                    "name": "Patient randomized",
+                    "label": null,
+                    "description": null,
+                    "procedureType": "",
+                    "code": {
+                      "id": "Code_1",
+                      "extensionAttributes": [],
+                      "code": "",
+                      "codeSystem": "",
+                      "codeSystemVersion": "",
+                      "decode": "",
+                      "instanceType": "Code"
+                    },
+                    "studyInterventionId": null,
+                    "notes": [],
+                    "instanceType": "Procedure"
+                  }
+                ],
+                "biomedicalConceptIds": [],
+                "bcCategoryIds": [],
+                "bcSurrogateIds": [],
+                "timelineId": null,
+                "notes": [],
+                "instanceType": "Activity"
+              },
+              {
+                "id": "Activity_29",
+                "extensionAttributes": [],
+                "name": "Vital Signs",
+                "label": null,
+                "description": null,
+                "previousId": null,
+                "nextId": null,
+                "childIds": [],
+                "definedProcedures": [
+                  {
+                    "id": "Procedure_29",
+                    "extensionAttributes": [],
+                    "name": "Temperature",
+                    "label": null,
+                    "description": null,
+                    "procedureType": "",
+                    "code": {
+                      "id": "Code_1",
+                      "extensionAttributes": [],
+                      "code": "",
+                      "codeSystem": "",
+                      "codeSystemVersion": "",
+                      "decode": "",
+                      "instanceType": "Code"
+                    },
+                    "studyInterventionId": null,
+                    "notes": [],
+                    "instanceType": "Procedure"
+                  }
+                ],
+                "biomedicalConceptIds": [],
+                "bcCategoryIds": [],
+                "bcSurrogateIds": [],
+                "timelineId": null,
+                "notes": [],
+                "instanceType": "Activity"
+              },
+              {
+                "id": "Activity_30",
+                "extensionAttributes": [],
+                "name": "Vital Signs",
+                "label": null,
+                "description": null,
+                "previousId": null,
+                "nextId": null,
+                "childIds": [],
+                "definedProcedures": [
+                  {
+                    "id": "Procedure_30",
+                    "extensionAttributes": [],
+                    "name": "Diastolic Blood Pressure",
+                    "label": null,
+                    "description": null,
+                    "procedureType": "",
+                    "code": {
+                      "id": "Code_1",
+                      "extensionAttributes": [],
+                      "code": "",
+                      "codeSystem": "",
+                      "codeSystemVersion": "",
+                      "decode": "",
+                      "instanceType": "Code"
+                    },
+                    "studyInterventionId": null,
+                    "notes": [],
+                    "instanceType": "Procedure"
+                  }
+                ],
+                "biomedicalConceptIds": [],
+                "bcCategoryIds": [],
+                "bcSurrogateIds": [],
+                "timelineId": null,
+                "notes": [],
+                "instanceType": "Activity"
+              },
+              {
+                "id": "Activity_31",
+                "extensionAttributes": [],
+                "name": "Vital Signs",
+                "label": null,
+                "description": null,
+                "previousId": null,
+                "nextId": null,
+                "childIds": [],
+                "definedProcedures": [
+                  {
+                    "id": "Procedure_31",
+                    "extensionAttributes": [],
+                    "name": "Pulse Rate",
+                    "label": null,
+                    "description": null,
+                    "procedureType": "",
+                    "code": {
+                      "id": "Code_1",
+                      "extensionAttributes": [],
+                      "code": "",
+                      "codeSystem": "",
+                      "codeSystemVersion": "",
+                      "decode": "",
+                      "instanceType": "Code"
+                    },
+                    "studyInterventionId": null,
+                    "notes": [],
+                    "instanceType": "Procedure"
+                  }
+                ],
+                "biomedicalConceptIds": [],
+                "bcCategoryIds": [],
+                "bcSurrogateIds": [],
+                "timelineId": null,
+                "notes": [],
+                "instanceType": "Activity"
+              },
+              {
+                "id": "Activity_32",
+                "extensionAttributes": [],
+                "name": "Body Measurements",
+                "label": null,
+                "description": null,
+                "previousId": null,
+                "nextId": null,
+                "childIds": [],
+                "definedProcedures": [
+                  {
+                    "id": "Procedure_32",
+                    "extensionAttributes": [],
+                    "name": "Weight",
+                    "label": null,
+                    "description": null,
+                    "procedureType": "",
+                    "code": {
+                      "id": "Code_1",
+                      "extensionAttributes": [],
+                      "code": "",
+                      "codeSystem": "",
+                      "codeSystemVersion": "",
+                      "decode": "",
+                      "instanceType": "Code"
+                    },
+                    "studyInterventionId": null,
+                    "notes": [],
+                    "instanceType": "Procedure"
+                  }
+                ],
+                "biomedicalConceptIds": [],
+                "bcCategoryIds": [],
+                "bcSurrogateIds": [],
+                "timelineId": null,
+                "notes": [],
+                "instanceType": "Activity"
+              },
+              {
+                "id": "Activity_33",
+                "extensionAttributes": [],
+                "name": "CGM",
+                "label": null,
+                "description": null,
+                "previousId": null,
+                "nextId": null,
+                "childIds": [],
+                "definedProcedures": [
+                  {
+                    "id": "Procedure_33",
+                    "extensionAttributes": [],
+                    "name": "Ambulatory ECG placed",
+                    "label": null,
+                    "description": null,
+                    "procedureType": "",
+                    "code": {
+                      "id": "Code_1",
+                      "extensionAttributes": [],
+                      "code": "",
+                      "codeSystem": "",
+                      "codeSystemVersion": "",
+                      "decode": "",
+                      "instanceType": "Code"
+                    },
+                    "studyInterventionId": null,
+                    "notes": [],
+                    "instanceType": "Procedure"
+                  }
+                ],
+                "biomedicalConceptIds": [],
+                "bcCategoryIds": [],
+                "bcSurrogateIds": [],
+                "timelineId": null,
+                "notes": [],
+                "instanceType": "Activity"
+              },
+              {
+                "id": "Activity_34",
+                "extensionAttributes": [],
+                "name": "CGM",
+                "label": null,
+                "description": null,
+                "previousId": null,
+                "nextId": null,
+                "childIds": [],
+                "definedProcedures": [
+                  {
+                    "id": "Procedure_34",
+                    "extensionAttributes": [],
+                    "name": "Ambulatory ECG removed",
+                    "label": null,
+                    "description": null,
+                    "procedureType": "",
+                    "code": {
+                      "id": "Code_1",
+                      "extensionAttributes": [],
+                      "code": "",
+                      "codeSystem": "",
+                      "codeSystemVersion": "",
+                      "decode": "",
+                      "instanceType": "Code"
+                    },
+                    "studyInterventionId": null,
+                    "notes": [],
+                    "instanceType": "Procedure"
+                  }
+                ],
+                "biomedicalConceptIds": [],
+                "bcCategoryIds": [],
+                "bcSurrogateIds": [],
+                "timelineId": null,
+                "notes": [],
+                "instanceType": "Activity"
+              },
+              {
+                "id": "Activity_35",
+                "extensionAttributes": [],
+                "name": "CGM",
+                "label": null,
+                "description": null,
+                "previousId": null,
+                "nextId": null,
+                "childIds": [],
+                "definedProcedures": [
+                  {
+                    "id": "Procedure_35",
+                    "extensionAttributes": [],
+                    "name": "ECG",
+                    "label": null,
+                    "description": null,
+                    "procedureType": "",
+                    "code": {
+                      "id": "Code_1",
+                      "extensionAttributes": [],
+                      "code": "",
+                      "codeSystem": "",
+                      "codeSystemVersion": "",
+                      "decode": "",
+                      "instanceType": "Code"
+                    },
+                    "studyInterventionId": null,
+                    "notes": [],
+                    "instanceType": "Procedure"
+                  }
+                ],
+                "biomedicalConceptIds": [],
+                "bcCategoryIds": [],
+                "bcSurrogateIds": [],
+                "timelineId": null,
+                "notes": [],
+                "instanceType": "Activity"
+              },
+              {
+                "id": "Activity_36",
+                "extensionAttributes": [],
+                "name": "Laboratory Assessment",
+                "label": null,
+                "description": null,
+                "previousId": null,
+                "nextId": null,
+                "childIds": [],
+                "definedProcedures": [
+                  {
+                    "id": "Procedure_36",
+                    "extensionAttributes": [],
+                    "name": "Albumin/Creatinine",
+                    "label": null,
+                    "description": null,
+                    "procedureType": "",
+                    "code": {
+                      "id": "Code_1",
+                      "extensionAttributes": [],
+                      "code": "",
+                      "codeSystem": "",
+                      "codeSystemVersion": "",
+                      "decode": "",
+                      "instanceType": "Code"
+                    },
+                    "studyInterventionId": null,
+                    "notes": [],
+                    "instanceType": "Procedure"
+                  }
+                ],
+                "biomedicalConceptIds": [],
+                "bcCategoryIds": [],
+                "bcSurrogateIds": [],
+                "timelineId": null,
+                "notes": [],
+                "instanceType": "Activity"
+              },
+              {
+                "id": "Activity_37",
+                "extensionAttributes": [],
+                "name": "End of Study",
+                "label": null,
+                "description": null,
+                "previousId": null,
+                "nextId": null,
+                "childIds": [],
+                "definedProcedures": [
+                  {
+                    "id": "Procedure_37",
+                    "extensionAttributes": [],
+                    "name": "Study drug record",
+                    "label": null,
+                    "description": null,
+                    "procedureType": "",
+                    "code": {
+                      "id": "Code_1",
+                      "extensionAttributes": [],
+                      "code": "",
+                      "codeSystem": "",
+                      "codeSystemVersion": "",
+                      "decode": "",
+                      "instanceType": "Code"
+                    },
+                    "studyInterventionId": null,
+                    "notes": [],
+                    "instanceType": "Procedure"
+                  }
+                ],
+                "biomedicalConceptIds": [],
+                "bcCategoryIds": [],
+                "bcSurrogateIds": [],
+                "timelineId": null,
+                "notes": [],
+                "instanceType": "Activity"
+              },
+              {
+                "id": "Activity_38",
+                "extensionAttributes": [],
+                "name": "Adverse Event",
+                "label": null,
+                "description": null,
+                "previousId": null,
+                "nextId": null,
+                "childIds": [],
+                "definedProcedures": [
+                  {
+                    "id": "Procedure_38",
+                    "extensionAttributes": [],
+                    "name": "Adverse Event",
+                    "label": null,
+                    "description": null,
+                    "procedureType": "",
+                    "code": {
+                      "id": "Code_1",
+                      "extensionAttributes": [],
+                      "code": "",
+                      "codeSystem": "",
+                      "codeSystemVersion": "",
+                      "decode": "",
+                      "instanceType": "Code"
+                    },
+                    "studyInterventionId": null,
+                    "notes": [],
+                    "instanceType": "Procedure"
+                  }
+                ],
+                "biomedicalConceptIds": [],
+                "bcCategoryIds": [],
+                "bcSurrogateIds": [],
+                "timelineId": null,
+                "notes": [],
+                "instanceType": "Activity"
+              },
+              {
+                "id": "Activity_39",
+                "extensionAttributes": [],
+                "name": "TBD_999-3101",
+                "label": null,
+                "description": null,
+                "previousId": null,
+                "nextId": null,
+                "childIds": [],
+                "definedProcedures": [
+                  {
+                    "id": "Procedure_39",
+                    "extensionAttributes": [],
+                    "name": "Supine",
+                    "label": null,
+                    "description": null,
+                    "procedureType": "",
+                    "code": {
+                      "id": "Code_1",
+                      "extensionAttributes": [],
+                      "code": "",
+                      "codeSystem": "",
+                      "codeSystemVersion": "",
+                      "decode": "",
+                      "instanceType": "Code"
+                    },
+                    "studyInterventionId": null,
+                    "notes": [],
+                    "instanceType": "Procedure"
+                  }
+                ],
+                "biomedicalConceptIds": [],
+                "bcCategoryIds": [],
+                "bcSurrogateIds": [],
+                "timelineId": null,
+                "notes": [],
+                "instanceType": "Activity"
+              },
+              {
+                "id": "Activity_40",
+                "extensionAttributes": [],
+                "name": "TBD_999-3101",
+                "label": null,
+                "description": null,
+                "previousId": null,
+                "nextId": null,
+                "childIds": [],
+                "definedProcedures": [
+                  {
+                    "id": "Procedure_40",
+                    "extensionAttributes": [],
+                    "name": "Stand",
+                    "label": null,
+                    "description": null,
+                    "procedureType": "",
+                    "code": {
+                      "id": "Code_1",
+                      "extensionAttributes": [],
+                      "code": "",
+                      "codeSystem": "",
+                      "codeSystemVersion": "",
+                      "decode": "",
+                      "instanceType": "Code"
+                    },
+                    "studyInterventionId": null,
+                    "notes": [],
+                    "instanceType": "Procedure"
+                  }
+                ],
+                "biomedicalConceptIds": [],
+                "bcCategoryIds": [],
+                "bcSurrogateIds": [],
+                "timelineId": null,
+                "notes": [],
+                "instanceType": "Activity"
+              }
+            ],
+            "arms": [
+              {
+                "id": "StudyArm_1",
+                "extensionAttributes": [],
+                "name": "Placebo",
+                "label": "Placebo",
+                "description": "Placebo",
+                "type": {
+                  "id": "Code_7",
+                  "extensionAttributes": [],
+                  "code": "CTTerm_000086",
+                  "codeSystem": "Sponsor",
+                  "codeSystemVersion": "2025-11-14",
+                  "decode": "Placebo arm",
+                  "instanceType": "Code"
+                },
+                "dataOriginDescription": "",
+                "dataOriginType": {
+                  "id": "Code_1",
+                  "extensionAttributes": [],
+                  "code": "",
+                  "codeSystem": "",
+                  "codeSystemVersion": "",
+                  "decode": "",
+                  "instanceType": "Code"
+                },
+                "populationIds": [],
+                "notes": [],
+                "instanceType": "StudyArm"
+              },
+              {
+                "id": "StudyArm_2",
+                "extensionAttributes": [],
+                "name": "Xanomeline Low Dose",
+                "label": "Xanomeline Low Dose",
+                "description": "Active Substance",
+                "type": {
+                  "id": "Code_8",
+                  "extensionAttributes": [],
+                  "code": "CTTerm_000088",
+                  "codeSystem": "Sponsor",
+                  "codeSystemVersion": "2025-11-14",
+                  "decode": "Comparator arm",
+                  "instanceType": "Code"
+                },
+                "dataOriginDescription": "",
+                "dataOriginType": {
+                  "id": "Code_1",
+                  "extensionAttributes": [],
+                  "code": "",
+                  "codeSystem": "",
+                  "codeSystemVersion": "",
+                  "decode": "",
+                  "instanceType": "Code"
+                },
+                "populationIds": [],
+                "notes": [],
+                "instanceType": "StudyArm"
+              },
+              {
+                "id": "StudyArm_3",
+                "extensionAttributes": [],
+                "name": "Xanomeline High Dose",
+                "label": "Xanomeline High Dose",
+                "description": "Active Substance",
+                "type": {
+                  "id": "Code_8",
+                  "extensionAttributes": [],
+                  "code": "CTTerm_000088",
+                  "codeSystem": "Sponsor",
+                  "codeSystemVersion": "2025-11-14",
+                  "decode": "Comparator arm",
+                  "instanceType": "Code"
+                },
+                "dataOriginDescription": "",
+                "dataOriginType": {
+                  "id": "Code_1",
+                  "extensionAttributes": [],
+                  "code": "",
+                  "codeSystem": "",
+                  "codeSystemVersion": "",
+                  "decode": "",
+                  "instanceType": "Code"
+                },
+                "populationIds": [],
+                "notes": [],
+                "instanceType": "StudyArm"
+              }
+            ],
+            "studyCells": [],
+            "rationale": "",
+            "epochs": [
+              {
+                "id": "StudyEpoch_1",
+                "extensionAttributes": [],
+                "name": "Screening",
+                "label": "Screening",
+                "description": "Screening Epoch",
+                "type": {
+                  "id": "Code_9",
+                  "extensionAttributes": [],
+                  "code": "CTTerm_000004",
+                  "codeSystem": "Sponsor",
+                  "codeSystemVersion": "2025-11-14",
+                  "decode": "UNK",
+                  "instanceType": "Code"
+                },
+                "previousId": null,
+                "nextId": "StudyEpoch_2",
+                "notes": [],
+                "instanceType": "StudyEpoch"
+              },
+              {
+                "id": "StudyEpoch_2",
+                "extensionAttributes": [],
+                "name": "Treatment 1",
+                "label": "Treatment 1",
+                "description": "Treatment Epoch",
+                "type": {
+                  "id": "Code_10",
+                  "extensionAttributes": [],
+                  "code": "C101526_TREATMENT",
+                  "codeSystem": "CDISC",
+                  "codeSystemVersion": "2025-11-14",
+                  "decode": "Treatment Epoch",
+                  "instanceType": "Code"
+                },
+                "previousId": "StudyEpoch_1",
+                "nextId": "StudyEpoch_3",
+                "notes": [],
+                "instanceType": "StudyEpoch"
+              },
+              {
+                "id": "StudyEpoch_3",
+                "extensionAttributes": [],
+                "name": "Treatment 2",
+                "label": "Treatment 2",
+                "description": "Treatment Epoch",
+                "type": {
+                  "id": "Code_10",
+                  "extensionAttributes": [],
+                  "code": "C101526_TREATMENT",
+                  "codeSystem": "CDISC",
+                  "codeSystemVersion": "2025-11-14",
+                  "decode": "Treatment Epoch",
+                  "instanceType": "Code"
+                },
+                "previousId": "StudyEpoch_2",
+                "nextId": "StudyEpoch_4",
+                "notes": [],
+                "instanceType": "StudyEpoch"
+              },
+              {
+                "id": "StudyEpoch_4",
+                "extensionAttributes": [],
+                "name": "Treatment",
+                "label": "Treatment",
+                "description": "Treatment Epoch",
+                "type": {
+                  "id": "Code_10",
+                  "extensionAttributes": [],
+                  "code": "C101526_TREATMENT",
+                  "codeSystem": "CDISC",
+                  "codeSystemVersion": "2025-11-14",
+                  "decode": "Treatment Epoch",
+                  "instanceType": "Code"
+                },
+                "previousId": "StudyEpoch_3",
+                "nextId": "StudyEpoch_5",
+                "notes": [],
+                "instanceType": "StudyEpoch"
+              },
+              {
+                "id": "StudyEpoch_5",
+                "extensionAttributes": [],
+                "name": "Follow-up",
+                "label": "Follow-up",
+                "description": "Follow-up Epoch",
+                "type": {
+                  "id": "Code_11",
+                  "extensionAttributes": [],
+                  "code": "CTTerm_000002",
+                  "codeSystem": "Sponsor",
+                  "codeSystemVersion": "2025-11-14",
+                  "decode": "UNK",
+                  "instanceType": "Code"
+                },
+                "previousId": "StudyEpoch_4",
+                "nextId": null,
+                "notes": [],
+                "instanceType": "StudyEpoch"
+              }
+            ],
+            "elements": [
+              {
+                "id": "StudyElement_1",
+                "extensionAttributes": [],
+                "name": "StudyElement_1",
+                "label": "Screening",
+                "description": "Screening Element",
+                "transitionStartRule": null,
+                "transitionEndRule": null,
+                "studyInterventionIds": [],
+                "notes": [],
+                "instanceType": "StudyElement"
+              },
+              {
+                "id": "StudyElement_2",
+                "extensionAttributes": [],
+                "name": "StudyElement_2",
+                "label": "Placebo",
+                "description": "Placebo TTS (adhesive patches)",
+                "transitionStartRule": null,
+                "transitionEndRule": null,
+                "studyInterventionIds": [],
+                "notes": [],
+                "instanceType": "StudyElement"
+              },
+              {
+                "id": "StudyElement_3",
+                "extensionAttributes": [],
+                "name": "StudyElement_3",
+                "label": "Follow up",
+                "description": "Follow Up Element",
+                "transitionStartRule": null,
+                "transitionEndRule": null,
+                "studyInterventionIds": [],
+                "notes": [],
+                "instanceType": "StudyElement"
+              },
+              {
+                "id": "StudyElement_4",
+                "extensionAttributes": [],
+                "name": "StudyElement_4",
+                "label": "Low",
+                "description": "Xanomeline TTS (adhesive patches) 50 cm2, 54 mg",
+                "transitionStartRule": null,
+                "transitionEndRule": null,
+                "studyInterventionIds": [],
+                "notes": [],
+                "instanceType": "StudyElement"
+              },
+              {
+                "id": "StudyElement_5",
+                "extensionAttributes": [],
+                "name": "StudyElement_5",
+                "label": "High - Start",
+                "description": "Xanomeline TTS (adhesive patches) 50 cm2, 54 mg",
+                "transitionStartRule": null,
+                "transitionEndRule": null,
+                "studyInterventionIds": [],
+                "notes": [],
+                "instanceType": "StudyElement"
+              },
+              {
+                "id": "StudyElement_6",
+                "extensionAttributes": [],
+                "name": "StudyElement_6",
+                "label": "High - Middle",
+                "description": "Xanomeline TTS (adhesive patches) 50 cm2, 54 mg + 25 cm2, 27 mg",
+                "transitionStartRule": null,
+                "transitionEndRule": null,
+                "studyInterventionIds": [],
+                "notes": [],
+                "instanceType": "StudyElement"
+              },
+              {
+                "id": "StudyElement_7",
+                "extensionAttributes": [],
+                "name": "StudyElement_7",
+                "label": "High - End",
+                "description": "Xanomeline TTS (adhesive patches) 50 cm2, 54 mg",
+                "transitionStartRule": null,
+                "transitionEndRule": null,
+                "studyInterventionIds": [],
+                "notes": [],
+                "instanceType": "StudyElement"
+              }
+            ],
+            "estimands": [],
+            "indications": [
+              {
+                "id": "Indication_1",
+                "extensionAttributes": [],
+                "name": "Alzheimer's disease",
+                "label": "Alzheimer's disease",
+                "description": null,
+                "codes": [],
+                "isRareDisease": false,
+                "notes": [],
+                "instanceType": "Indication"
+              }
+            ],
+            "studyInterventionIds": [
+              "StudyIntervention_1"
+            ],
+            "objectives": [
+              {
+                "id": "Objective_1",
+                "extensionAttributes": [],
+                "name": "Objective_1",
+                "label": "To document the safety profile of the xanomeline TTS.",
+                "description": "To document the safety profile of the xanomeline TTS.",
+                "text": "To document the safety profile of the xanomeline TTS.",
+                "dictionaryId": null,
+                "notes": [],
+                "instanceType": "Objective",
+                "level": {
+                  "id": "Code_12",
+                  "extensionAttributes": [],
+                  "code": "C85826_OBJPRIM",
+                  "codeSystem": "CDISC",
+                  "codeSystemVersion": "2025-11-14",
+                  "decode": "Trial Primary Objective",
+                  "instanceType": "Code"
+                },
+                "endpoints": [
+                  {
+                    "id": "Endpoint_1",
+                    "extensionAttributes": [],
+                    "name": "Endpoint_1",
+                    "label": "Adverse events",
+                    "description": "Adverse events",
+                    "text": "Adverse events",
+                    "dictionaryId": null,
+                    "notes": [],
+                    "instanceType": "Endpoint",
+                    "purpose": "Adverse events",
+                    "level": {
+                      "id": "Code_1",
+                      "extensionAttributes": [],
+                      "code": "",
+                      "codeSystem": "",
+                      "codeSystemVersion": "",
+                      "decode": "",
+                      "instanceType": "Code"
+                    }
+                  }
+                ]
+              },
+              {
+                "id": "Objective_1",
+                "extensionAttributes": [],
+                "name": "Objective_1",
+                "label": "To document the safety profile of the xanomeline TTS.",
+                "description": "To document the safety profile of the xanomeline TTS.",
+                "text": "To document the safety profile of the xanomeline TTS.",
+                "dictionaryId": null,
+                "notes": [],
+                "instanceType": "Objective",
+                "level": {
+                  "id": "Code_12",
+                  "extensionAttributes": [],
+                  "code": "C85826_OBJPRIM",
+                  "codeSystem": "CDISC",
+                  "codeSystemVersion": "2025-11-14",
+                  "decode": "Trial Primary Objective",
+                  "instanceType": "Code"
+                },
+                "endpoints": [
+                  {
+                    "id": "Endpoint_2",
+                    "extensionAttributes": [],
+                    "name": "Endpoint_2",
+                    "label": "Vital signs (weight, standing and supine blood pressure, heart rate)",
+                    "description": "Vital signs (weight, standing and supine blood pressure, heart rate)",
+                    "text": "Vital signs (weight, standing and supine blood pressure, heart rate)",
+                    "dictionaryId": null,
+                    "notes": [],
+                    "instanceType": "Endpoint",
+                    "purpose": "Vital signs (weight, standing and supine blood pressure, heart rate)",
+                    "level": {
+                      "id": "Code_1",
+                      "extensionAttributes": [],
+                      "code": "",
+                      "codeSystem": "",
+                      "codeSystemVersion": "",
+                      "decode": "",
+                      "instanceType": "Code"
+                    }
+                  }
+                ]
+              },
+              {
+                "id": "Objective_1",
+                "extensionAttributes": [],
+                "name": "Objective_1",
+                "label": "To document the safety profile of the xanomeline TTS.",
+                "description": "To document the safety profile of the xanomeline TTS.",
+                "text": "To document the safety profile of the xanomeline TTS.",
+                "dictionaryId": null,
+                "notes": [],
+                "instanceType": "Objective",
+                "level": {
+                  "id": "Code_12",
+                  "extensionAttributes": [],
+                  "code": "C85826_OBJPRIM",
+                  "codeSystem": "CDISC",
+                  "codeSystemVersion": "2025-11-14",
+                  "decode": "Trial Primary Objective",
+                  "instanceType": "Code"
+                },
+                "endpoints": [
+                  {
+                    "id": "Endpoint_3",
+                    "extensionAttributes": [],
+                    "name": "Endpoint_3",
+                    "label": "Laboratory evaluations (Change from Baseline)",
+                    "description": "Laboratory evaluations (Change from Baseline)",
+                    "text": "Laboratory evaluations (Change from Baseline)",
+                    "dictionaryId": null,
+                    "notes": [],
+                    "instanceType": "Endpoint",
+                    "purpose": "Laboratory evaluations (Change from Baseline)",
+                    "level": {
+                      "id": "Code_1",
+                      "extensionAttributes": [],
+                      "code": "",
+                      "codeSystem": "",
+                      "codeSystemVersion": "",
+                      "decode": "",
+                      "instanceType": "Code"
+                    }
+                  }
+                ]
+              },
+              {
+                "id": "Objective_2",
+                "extensionAttributes": [],
+                "name": "Objective_2",
+                "label": "To assess the dose-dependent improvement in behavior. Improved scores on the Revised Neuropsychiatric Inventory (NPI-X) will indicate improvement in these\nareas.",
+                "description": "To assess the dose-dependent improvement in behavior. Improved scores on the Revised Neuropsychiatric Inventory (NPI-X) will indicate improvement in these\nareas.",
+                "text": "To assess the dose-dependent improvement in behavior. Improved scores on the Revised Neuropsychiatric Inventory (NPI-X) will indicate improvement in these\nareas.",
+                "dictionaryId": null,
+                "notes": [],
+                "instanceType": "Objective",
+                "level": {
+                  "id": "Code_13",
+                  "extensionAttributes": [],
+                  "code": "C85827_OBJSEC",
+                  "codeSystem": "CDISC",
+                  "codeSystemVersion": "2025-11-14",
+                  "decode": "Trial Secondary Objective",
+                  "instanceType": "Code"
+                },
+                "endpoints": [
+                  {
+                    "id": "Endpoint_4",
+                    "extensionAttributes": [],
+                    "name": "Endpoint_4",
+                    "label": "Alzheimer's Disease Assessment Scale - Cognitive Subscale, total of 11 items (ADAS-Cog (11)) at Weeks 8 and 16",
+                    "description": "Alzheimer's Disease Assessment Scale - Cognitive Subscale, total of 11 items (ADAS-Cog (11)) at Weeks 8 and 16",
+                    "text": "Alzheimer's Disease Assessment Scale - Cognitive Subscale, total of 11 items (ADAS-Cog (11)) at Weeks 8 and 16",
+                    "dictionaryId": null,
+                    "notes": [],
+                    "instanceType": "Endpoint",
+                    "purpose": "Alzheimer's Disease Assessment Scale - Cognitive Subscale, total of 11 items (ADAS-Cog (11)) at Weeks 8 and 16",
+                    "level": {
+                      "id": "Code_1",
+                      "extensionAttributes": [],
+                      "code": "",
+                      "codeSystem": "",
+                      "codeSystemVersion": "",
+                      "decode": "",
+                      "instanceType": "Code"
+                    }
+                  }
+                ]
+              },
+              {
+                "id": "Objective_2",
+                "extensionAttributes": [],
+                "name": "Objective_2",
+                "label": "To assess the dose-dependent improvement in behavior. Improved scores on the Revised Neuropsychiatric Inventory (NPI-X) will indicate improvement in these\nareas.",
+                "description": "To assess the dose-dependent improvement in behavior. Improved scores on the Revised Neuropsychiatric Inventory (NPI-X) will indicate improvement in these\nareas.",
+                "text": "To assess the dose-dependent improvement in behavior. Improved scores on the Revised Neuropsychiatric Inventory (NPI-X) will indicate improvement in these\nareas.",
+                "dictionaryId": null,
+                "notes": [],
+                "instanceType": "Objective",
+                "level": {
+                  "id": "Code_13",
+                  "extensionAttributes": [],
+                  "code": "C85827_OBJSEC",
+                  "codeSystem": "CDISC",
+                  "codeSystemVersion": "2025-11-14",
+                  "decode": "Trial Secondary Objective",
+                  "instanceType": "Code"
+                },
+                "endpoints": [
+                  {
+                    "id": "Endpoint_5",
+                    "extensionAttributes": [],
+                    "name": "Endpoint_5",
+                    "label": "Video-referenced Clinician\u2019s Interview-based Impression of Change (CIBIC+) at Weeks 8 and 16",
+                    "description": "Video-referenced Clinician\u2019s Interview-based Impression of Change (CIBIC+) at Weeks 8 and 16",
+                    "text": "Video-referenced Clinician\u2019s Interview-based Impression of Change (CIBIC+) at Weeks 8 and 16",
+                    "dictionaryId": null,
+                    "notes": [],
+                    "instanceType": "Endpoint",
+                    "purpose": "Video-referenced Clinician\u2019s Interview-based Impression of Change (CIBIC+) at Weeks 8 and 16",
+                    "level": {
+                      "id": "Code_1",
+                      "extensionAttributes": [],
+                      "code": "",
+                      "codeSystem": "",
+                      "codeSystemVersion": "",
+                      "decode": "",
+                      "instanceType": "Code"
+                    }
+                  }
+                ]
+              },
+              {
+                "id": "Objective_2",
+                "extensionAttributes": [],
+                "name": "Objective_2",
+                "label": "To assess the dose-dependent improvement in behavior. Improved scores on the Revised Neuropsychiatric Inventory (NPI-X) will indicate improvement in these\nareas.",
+                "description": "To assess the dose-dependent improvement in behavior. Improved scores on the Revised Neuropsychiatric Inventory (NPI-X) will indicate improvement in these\nareas.",
+                "text": "To assess the dose-dependent improvement in behavior. Improved scores on the Revised Neuropsychiatric Inventory (NPI-X) will indicate improvement in these\nareas.",
+                "dictionaryId": null,
+                "notes": [],
+                "instanceType": "Objective",
+                "level": {
+                  "id": "Code_13",
+                  "extensionAttributes": [],
+                  "code": "C85827_OBJSEC",
+                  "codeSystem": "CDISC",
+                  "codeSystemVersion": "2025-11-14",
+                  "decode": "Trial Secondary Objective",
+                  "instanceType": "Code"
+                },
+                "endpoints": [
+                  {
+                    "id": "Endpoint_6",
+                    "extensionAttributes": [],
+                    "name": "Endpoint_6",
+                    "label": "Mean Revised Neuropsychiatric Inventory (NPI-X) from Week 4 to Week 24",
+                    "description": "Mean Revised Neuropsychiatric Inventory (NPI-X) from Week 4 to Week 24",
+                    "text": "Mean Revised Neuropsychiatric Inventory (NPI-X) from Week 4 to Week 24",
+                    "dictionaryId": null,
+                    "notes": [],
+                    "instanceType": "Endpoint",
+                    "purpose": "Mean Revised Neuropsychiatric Inventory (NPI-X) from Week 4 to Week 24",
+                    "level": {
+                      "id": "Code_1",
+                      "extensionAttributes": [],
+                      "code": "",
+                      "codeSystem": "",
+                      "codeSystemVersion": "",
+                      "decode": "",
+                      "instanceType": "Code"
+                    }
+                  }
+                ]
+              },
+              {
+                "id": "Objective_3",
+                "extensionAttributes": [],
+                "name": "Objective_3",
+                "label": "To assess the dose-dependent improvements in activities of daily living. Improved scores on the Disability Assessment for Dementia (DAD) will indicate improvement in these areas (see Attachment LZZT.5).",
+                "description": "To assess the dose-dependent improvements in activities of daily living. Improved scores on the Disability Assessment for Dementia (DAD) will indicate improvement in these areas (see Attachment LZZT.5).",
+                "text": "To assess the dose-dependent improvements in activities of daily living. Improved scores on the Disability Assessment for Dementia (DAD) will indicate improvement in these areas (see Attachment LZZT.5).",
+                "dictionaryId": null,
+                "notes": [],
+                "instanceType": "Objective",
+                "level": {
+                  "id": "Code_13",
+                  "extensionAttributes": [],
+                  "code": "C85827_OBJSEC",
+                  "codeSystem": "CDISC",
+                  "codeSystemVersion": "2025-11-14",
+                  "decode": "Trial Secondary Objective",
+                  "instanceType": "Code"
+                },
+                "endpoints": [
+                  {
+                    "id": "Endpoint_7",
+                    "extensionAttributes": [],
+                    "name": "Endpoint_7",
+                    "label": "*** To be determined from protocol ***",
+                    "description": "*** To be determined from protocol ***",
+                    "text": "*** To be determined from protocol ***",
+                    "dictionaryId": null,
+                    "notes": [],
+                    "instanceType": "Endpoint",
+                    "purpose": "*** To be determined from protocol ***",
+                    "level": {
+                      "id": "Code_1",
+                      "extensionAttributes": [],
+                      "code": "",
+                      "codeSystem": "",
+                      "codeSystemVersion": "",
+                      "decode": "",
+                      "instanceType": "Code"
+                    }
+                  }
+                ]
+              },
+              {
+                "id": "Objective_4",
+                "extensionAttributes": [],
+                "name": "Objective_4",
+                "label": "To assess the dose-dependent improvements in an extended assessment of cognition that integrates attention/concentration tasks. The Alzheimer's Disease Assessment Scale-14 item Cognitive Subscale, hereafter referred to as ADAS-Cog (14), will be used for this assessment (see Attachment LZZT.2).",
+                "description": "To assess the dose-dependent improvements in an extended assessment of cognition that integrates attention/concentration tasks. The Alzheimer's Disease Assessment Scale-14 item Cognitive Subscale, hereafter referred to as ADAS-Cog (14), will be used for this assessment (see Attachment LZZT.2).",
+                "text": "To assess the dose-dependent improvements in an extended assessment of cognition that integrates attention/concentration tasks. The Alzheimer's Disease Assessment Scale-14 item Cognitive Subscale, hereafter referred to as ADAS-Cog (14), will be used for this assessment (see Attachment LZZT.2).",
+                "dictionaryId": null,
+                "notes": [],
+                "instanceType": "Objective",
+                "level": {
+                  "id": "Code_13",
+                  "extensionAttributes": [],
+                  "code": "C85827_OBJSEC",
+                  "codeSystem": "CDISC",
+                  "codeSystemVersion": "2025-11-14",
+                  "decode": "Trial Secondary Objective",
+                  "instanceType": "Code"
+                },
+                "endpoints": [
+                  {
+                    "id": "Endpoint_7",
+                    "extensionAttributes": [],
+                    "name": "Endpoint_7",
+                    "label": "*** To be determined from protocol ***",
+                    "description": "*** To be determined from protocol ***",
+                    "text": "*** To be determined from protocol ***",
+                    "dictionaryId": null,
+                    "notes": [],
+                    "instanceType": "Endpoint",
+                    "purpose": "*** To be determined from protocol ***",
+                    "level": {
+                      "id": "Code_1",
+                      "extensionAttributes": [],
+                      "code": "",
+                      "codeSystem": "",
+                      "codeSystemVersion": "",
+                      "decode": "",
+                      "instanceType": "Code"
+                    }
+                  }
+                ]
+              },
+              {
+                "id": "Objective_5",
+                "extensionAttributes": [],
+                "name": "Objective_5",
+                "label": "To assess the treatment response as a function of Apo E genotype.",
+                "description": "To assess the treatment response as a function of Apo E genotype.",
+                "text": "To assess the treatment response as a function of Apo E genotype.",
+                "dictionaryId": null,
+                "notes": [],
+                "instanceType": "Objective",
+                "level": {
+                  "id": "Code_13",
+                  "extensionAttributes": [],
+                  "code": "C85827_OBJSEC",
+                  "codeSystem": "CDISC",
+                  "codeSystemVersion": "2025-11-14",
+                  "decode": "Trial Secondary Objective",
+                  "instanceType": "Code"
+                },
+                "endpoints": [
+                  {
+                    "id": "Endpoint_7",
+                    "extensionAttributes": [],
+                    "name": "Endpoint_7",
+                    "label": "*** To be determined from protocol ***",
+                    "description": "*** To be determined from protocol ***",
+                    "text": "*** To be determined from protocol ***",
+                    "dictionaryId": null,
+                    "notes": [],
+                    "instanceType": "Endpoint",
+                    "purpose": "*** To be determined from protocol ***",
+                    "level": {
+                      "id": "Code_1",
+                      "extensionAttributes": [],
+                      "code": "",
+                      "codeSystem": "",
+                      "codeSystemVersion": "",
+                      "decode": "",
+                      "instanceType": "Code"
+                    }
+                  }
+                ]
+              }
+            ],
+            "population": {
+              "id": "StudyDesignPopulation_1",
+              "extensionAttributes": [],
+              "name": "Study Design Population",
+              "label": null,
+              "description": "diagnosis_group_codes: [] | disease_condition_or_indication_codes: [SimpleDictionaryTermModel(term_uid='DictionaryTerm_000004', name=\"Alzheimer's disease\", dictionary_id='26929004')] | healthy_subject_indicator: False | number_of_expected_subjects: None | pediatric_investigation_plan_indicator: False | pediatric_postmarket_study_indicator: False | pediatric_study_indicator: False | planned_maximum_age_of_subjects: duration_value=100 duration_unit_code=UnitDefinitionSimpleModel(uid='UnitDefinition_000368', name='weeks', dimension_name=None) | planned_minimum_age_of_subjects: duration_value=50 duration_unit_code=UnitDefinitionSimpleModel(uid='UnitDefinition_000368', name='weeks', dimension_name=None) | rare_disease_indicator: False | relapse_criteria: None | sex_of_participants_code: term_uid='C49636_BOTH' sponsor_preferred_name='Both' queried_effective_date=None date_conflict=False | stable_disease_minimum_duration: None | therapeutic_area_code: None",
+              "includesHealthySubjects": false,
+              "plannedEnrollmentNumberRange": null,
+              "plannedEnrollmentNumberQuantity": null,
+              "plannedCompletionNumberRange": null,
+              "plannedCompletionNumberQuantity": null,
+              "plannedSex": [
+                {
+                  "id": "Code_2",
+                  "extensionAttributes": [],
+                  "code": "C49636",
+                  "codeSystem": "CDISC",
+                  "codeSystemVersion": "2025-11-14",
+                  "decode": "Both",
+                  "instanceType": "Code"
+                }
+              ],
+              "criterionIds": [],
+              "plannedAge": {
+                "id": "Range_1",
+                "extensionAttributes": [],
+                "minValue": {
+                  "id": "Quantity_1",
+                  "extensionAttributes": [],
+                  "value": 50.0,
+                  "unit": {
+                    "id": "AliasCode_1",
+                    "extensionAttributes": [],
+                    "standardCode": {
+                      "id": "Code_3",
+                      "extensionAttributes": [],
+                      "code": "C29844",
+                      "codeSystem": "CDISC",
+                      "codeSystemVersion": "2025-11-14",
+                      "decode": "Week",
+                      "instanceType": "Code"
+                    },
+                    "standardCodeAliases": [],
+                    "instanceType": "AliasCode"
+                  },
+                  "instanceType": "Quantity"
+                },
+                "maxValue": {
+                  "id": "Quantity_2",
+                  "extensionAttributes": [],
+                  "value": 100.0,
+                  "unit": {
+                    "id": "AliasCode_2",
+                    "extensionAttributes": [],
+                    "standardCode": {
+                      "id": "Code_3",
+                      "extensionAttributes": [],
+                      "code": "C29844",
+                      "codeSystem": "CDISC",
+                      "codeSystemVersion": "2025-11-14",
+                      "decode": "Week",
+                      "instanceType": "Code"
+                    },
+                    "standardCodeAliases": [],
+                    "instanceType": "AliasCode"
+                  },
+                  "instanceType": "Quantity"
+                },
+                "isApproximate": false,
+                "instanceType": "Range"
+              },
+              "notes": [],
+              "instanceType": "StudyDesignPopulation",
+              "cohorts": []
+            },
+            "scheduleTimelines": [
+              {
+                "id": "ScheduleTimeline_1",
+                "extensionAttributes": [],
+                "name": "Main Timeline",
+                "label": null,
+                "description": null,
+                "mainTimeline": true,
+                "entryCondition": "",
+                "entryId": "",
+                "exits": [],
+                "timings": [
+                  {
+                    "id": "Timing_1",
+                    "extensionAttributes": [],
+                    "name": "Timing_1",
+                    "label": "Screening",
+                    "description": "Screening",
+                    "type": {
+                      "id": "Code_1",
+                      "extensionAttributes": [],
+                      "code": "",
+                      "codeSystem": "",
+                      "codeSystemVersion": "",
+                      "decode": "",
+                      "instanceType": "Code"
+                    },
+                    "value": "PT14H",
+                    "valueLabel": "14 hours",
+                    "relativeToFrom": {
+                      "id": "Code_1",
+                      "extensionAttributes": [],
+                      "code": "",
+                      "codeSystem": "",
+                      "codeSystemVersion": "",
+                      "decode": "",
+                      "instanceType": "Code"
+                    },
+                    "relativeFromScheduledInstanceId": "ScheduledActivityInstance_2",
+                    "relativeToScheduledInstanceId": "ScheduledActivityInstance_1",
+                    "windowLower": null,
+                    "windowUpper": null,
+                    "windowLabel": null,
+                    "instanceType": "Timing"
+                  },
+                  {
+                    "id": "Timing_2",
+                    "extensionAttributes": [],
+                    "name": "Timing_2",
+                    "label": "Screening",
+                    "description": "Screening",
+                    "type": {
+                      "id": "Code_1",
+                      "extensionAttributes": [],
+                      "code": "",
+                      "codeSystem": "",
+                      "codeSystemVersion": "",
+                      "decode": "",
+                      "instanceType": "Code"
+                    },
+                    "value": "PT2H",
+                    "valueLabel": "2 hours",
+                    "relativeToFrom": {
+                      "id": "Code_1",
+                      "extensionAttributes": [],
+                      "code": "",
+                      "codeSystem": "",
+                      "codeSystemVersion": "",
+                      "decode": "",
+                      "instanceType": "Code"
+                    },
+                    "relativeFromScheduledInstanceId": "ScheduledActivityInstance_3",
+                    "relativeToScheduledInstanceId": "ScheduledActivityInstance_1",
+                    "windowLower": null,
+                    "windowUpper": null,
+                    "windowLabel": null,
+                    "instanceType": "Timing"
+                  },
+                  {
+                    "id": "Timing_3",
+                    "extensionAttributes": [],
+                    "name": "Timing_3",
+                    "label": "Treatment 1",
+                    "description": "Treatment 1",
+                    "type": {
+                      "id": "Code_1",
+                      "extensionAttributes": [],
+                      "code": "",
+                      "codeSystem": "",
+                      "codeSystemVersion": "",
+                      "decode": "",
+                      "instanceType": "Code"
+                    },
+                    "value": "PT0H",
+                    "valueLabel": "0 hours",
+                    "relativeToFrom": {
+                      "id": "Code_1",
+                      "extensionAttributes": [],
+                      "code": "",
+                      "codeSystem": "",
+                      "codeSystemVersion": "",
+                      "decode": "",
+                      "instanceType": "Code"
+                    },
+                    "relativeFromScheduledInstanceId": "ScheduledActivityInstance_1",
+                    "relativeToScheduledInstanceId": "ScheduledActivityInstance_1",
+                    "windowLower": null,
+                    "windowUpper": null,
+                    "windowLabel": null,
+                    "instanceType": "Timing"
+                  },
+                  {
+                    "id": "Timing_4",
+                    "extensionAttributes": [],
+                    "name": "Timing_4",
+                    "label": "Treatment 1",
+                    "description": "Treatment 1",
+                    "type": {
+                      "id": "Code_1",
+                      "extensionAttributes": [],
+                      "code": "",
+                      "codeSystem": "",
+                      "codeSystemVersion": "",
+                      "decode": "",
+                      "instanceType": "Code"
+                    },
+                    "value": "PT14H",
+                    "valueLabel": "14 hours",
+                    "relativeToFrom": {
+                      "id": "Code_1",
+                      "extensionAttributes": [],
+                      "code": "",
+                      "codeSystem": "",
+                      "codeSystemVersion": "",
+                      "decode": "",
+                      "instanceType": "Code"
+                    },
+                    "relativeFromScheduledInstanceId": "ScheduledActivityInstance_4",
+                    "relativeToScheduledInstanceId": "ScheduledActivityInstance_1",
+                    "windowLower": null,
+                    "windowUpper": null,
+                    "windowLabel": null,
+                    "instanceType": "Timing"
+                  },
+                  {
+                    "id": "Timing_5",
+                    "extensionAttributes": [],
+                    "name": "Timing_5",
+                    "label": "Treatment 2",
+                    "description": "Treatment 2",
+                    "type": {
+                      "id": "Code_1",
+                      "extensionAttributes": [],
+                      "code": "",
+                      "codeSystem": "",
+                      "codeSystemVersion": "",
+                      "decode": "",
+                      "instanceType": "Code"
+                    },
+                    "value": "PT28H",
+                    "valueLabel": "28 hours",
+                    "relativeToFrom": {
+                      "id": "Code_1",
+                      "extensionAttributes": [],
+                      "code": "",
+                      "codeSystem": "",
+                      "codeSystemVersion": "",
+                      "decode": "",
+                      "instanceType": "Code"
+                    },
+                    "relativeFromScheduledInstanceId": "ScheduledActivityInstance_5",
+                    "relativeToScheduledInstanceId": "ScheduledActivityInstance_1",
+                    "windowLower": null,
+                    "windowUpper": null,
+                    "windowLabel": null,
+                    "instanceType": "Timing"
+                  },
+                  {
+                    "id": "Timing_6",
+                    "extensionAttributes": [],
+                    "name": "Timing_6",
+                    "label": "Treatment 2",
+                    "description": "Treatment 2",
+                    "type": {
+                      "id": "Code_1",
+                      "extensionAttributes": [],
+                      "code": "",
+                      "codeSystem": "",
+                      "codeSystemVersion": "",
+                      "decode": "",
+                      "instanceType": "Code"
+                    },
+                    "value": "PT42H",
+                    "valueLabel": "42 hours",
+                    "relativeToFrom": {
+                      "id": "Code_1",
+                      "extensionAttributes": [],
+                      "code": "",
+                      "codeSystem": "",
+                      "codeSystemVersion": "",
+                      "decode": "",
+                      "instanceType": "Code"
+                    },
+                    "relativeFromScheduledInstanceId": "ScheduledActivityInstance_6",
+                    "relativeToScheduledInstanceId": "ScheduledActivityInstance_1",
+                    "windowLower": null,
+                    "windowUpper": null,
+                    "windowLabel": null,
+                    "instanceType": "Timing"
+                  }
+                ],
+                "instances": [
+                  {
+                    "id": "ScheduledActivityInstance_2",
+                    "extensionAttributes": [],
+                    "name": "Activity Instance",
+                    "label": null,
+                    "description": null,
+                    "defaultConditionId": null,
+                    "epochId": "StudyEpoch_1",
+                    "instanceType": "ScheduledActivityInstance",
+                    "timelineId": "ScheduleTimeline_1",
+                    "timelineExitId": null,
+                    "activityIds": [
+                      "Activity_1",
+                      "Activity_2",
+                      "Activity_4",
+                      "Activity_5",
+                      "Activity_12",
+                      "Activity_14",
+                      "Activity_16",
+                      "Activity_17",
+                      "Activity_35",
+                      "Activity_10",
+                      "Activity_13",
+                      "Activity_15",
+                      "Activity_24",
+                      "Activity_6",
+                      "Activity_7",
+                      "Activity_8",
+                      "Activity_9"
+                    ],
+                    "encounterId": "Encounter_1"
+                  },
+                  {
+                    "id": "ScheduledActivityInstance_3",
+                    "extensionAttributes": [],
+                    "name": "Activity Instance",
+                    "label": null,
+                    "description": null,
+                    "defaultConditionId": null,
+                    "epochId": "StudyEpoch_1",
+                    "instanceType": "ScheduledActivityInstance",
+                    "timelineId": "ScheduleTimeline_1",
+                    "timelineExitId": null,
+                    "activityIds": [
+                      "Activity_33"
+                    ],
+                    "encounterId": "Encounter_2"
+                  },
+                  {
+                    "id": "ScheduledActivityInstance_1",
+                    "extensionAttributes": [],
+                    "name": "Activity Instance",
+                    "label": null,
+                    "description": null,
+                    "defaultConditionId": null,
+                    "epochId": "StudyEpoch_2",
+                    "instanceType": "ScheduledActivityInstance",
+                    "timelineId": "ScheduleTimeline_1",
+                    "timelineExitId": null,
+                    "activityIds": [
+                      "Activity_34",
+                      "Activity_15",
+                      "Activity_26",
+                      "Activity_6",
+                      "Activity_7",
+                      "Activity_8",
+                      "Activity_9"
+                    ],
+                    "encounterId": "Encounter_3"
+                  },
+                  {
+                    "id": "ScheduledActivityInstance_4",
+                    "extensionAttributes": [],
+                    "name": "Activity Instance",
+                    "label": null,
+                    "description": null,
+                    "defaultConditionId": null,
+                    "epochId": "StudyEpoch_2",
+                    "instanceType": "ScheduledActivityInstance",
+                    "timelineId": "ScheduleTimeline_1",
+                    "timelineExitId": null,
+                    "activityIds": [
+                      "Activity_23",
+                      "Activity_35",
+                      "Activity_15",
+                      "Activity_24",
+                      "Activity_26",
+                      "Activity_9"
+                    ],
+                    "encounterId": "Encounter_4"
+                  },
+                  {
+                    "id": "ScheduledActivityInstance_5",
+                    "extensionAttributes": [],
+                    "name": "Activity Instance",
+                    "label": null,
+                    "description": null,
+                    "defaultConditionId": null,
+                    "epochId": "StudyEpoch_3",
+                    "instanceType": "ScheduledActivityInstance",
+                    "timelineId": "ScheduleTimeline_1",
+                    "timelineExitId": null,
+                    "activityIds": [
+                      "Activity_35",
+                      "Activity_15",
+                      "Activity_24",
+                      "Activity_26",
+                      "Activity_9"
+                    ],
+                    "encounterId": "Encounter_5"
+                  },
+                  {
+                    "id": "ScheduledActivityInstance_6",
+                    "extensionAttributes": [],
+                    "name": "Activity Instance",
+                    "label": null,
+                    "description": null,
+                    "defaultConditionId": null,
+                    "epochId": "StudyEpoch_3",
+                    "instanceType": "ScheduledActivityInstance",
+                    "timelineId": "ScheduleTimeline_1",
+                    "timelineExitId": null,
+                    "activityIds": [
+                      "Activity_35",
+                      "Activity_15",
+                      "Activity_24",
+                      "Activity_26",
+                      "Activity_9",
+                      "Activity_6",
+                      "Activity_7",
+                      "Activity_8",
+                      "Activity_12",
+                      "Activity_11"
+                    ],
+                    "encounterId": "Encounter_6"
+                  }
+                ],
+                "instanceType": "ScheduleTimeline"
+              }
+            ],
+            "biospecimenRetentions": [],
+            "documentVersionIds": [],
+            "eligibilityCriteria": [],
+            "analysisPopulations": [],
+            "notes": [],
+            "instanceType": "StudyDesign"
+          }
+        ],
+        "titles": [
+          {
+            "id": "StudyTitle_1",
+            "extensionAttributes": [],
+            "text": "Study title not available",
+            "type": {
+              "id": "Code_1",
+              "extensionAttributes": [],
+              "code": "",
+              "codeSystem": "",
+              "codeSystemVersion": "",
+              "decode": "",
+              "instanceType": "Code"
+            },
+            "instanceType": "StudyTitle"
+          }
+        ],
+        "eligibilityCriterionItems": [],
+        "narrativeContentItems": [],
+        "abbreviations": [],
+        "roles": [],
+        "organizations": [],
+        "studyInterventions": [
+          {
+            "id": "StudyIntervention_1",
+            "extensionAttributes": [],
+            "name": "Study Intervention",
+            "label": null,
+            "description": null,
+            "role": {
+              "id": "Code_1",
+              "extensionAttributes": [],
+              "code": "",
+              "codeSystem": "",
+              "codeSystemVersion": "",
+              "decode": "",
+              "instanceType": "Code"
+            },
+            "type": {
+              "id": "Code_1",
+              "extensionAttributes": [],
+              "code": "",
+              "codeSystem": "",
+              "codeSystemVersion": "",
+              "decode": "",
+              "instanceType": "Code"
+            },
+            "minimumResponseDuration": null,
+            "codes": [
+              {
+                "id": "Code_1",
+                "extensionAttributes": [],
+                "code": "",
+                "codeSystem": "",
+                "codeSystemVersion": "",
+                "decode": "",
+                "instanceType": "Code"
+              }
+            ],
+            "administrations": [],
+            "notes": [],
+            "instanceType": "StudyIntervention"
+          }
+        ],
+        "administrableProducts": [],
+        "medicalDevices": [],
+        "productOrganizationRoles": [],
+        "biomedicalConcepts": [],
+        "bcCategories": [],
+        "bcSurrogates": [],
+        "dictionaries": [],
+        "conditions": [],
+        "notes": [],
+        "instanceType": "StudyVersion"
+      }
+    ],
+    "documentedBy": [
+      {
+        "id": "StudyDefinitionDocument_1",
+        "extensionAttributes": [],
+        "name": "Study Definition Document",
+        "label": null,
+        "description": null,
+        "language": {
+          "id": "Code_1",
+          "extensionAttributes": [],
+          "code": "",
+          "codeSystem": "",
+          "codeSystemVersion": "",
+          "decode": "",
+          "instanceType": "Code"
+        },
+        "type": {
+          "id": "Code_1",
+          "extensionAttributes": [],
+          "code": "",
+          "codeSystem": "",
+          "codeSystemVersion": "",
+          "decode": "",
+          "instanceType": "Code"
+        },
+        "templateName": "",
+        "versions": [
+          {
+            "id": "StudyDefinitionDocumentVersion_1",
+            "extensionAttributes": [],
+            "version": "DRAFT",
+            "status": {
+              "id": "Code_1",
+              "extensionAttributes": [],
+              "code": "",
+              "codeSystem": "",
+              "codeSystemVersion": "",
+              "decode": "",
+              "instanceType": "Code"
+            },
+            "dateValues": [],
+            "contents": [],
+            "childIds": [],
+            "notes": [],
+            "instanceType": "StudyDefinitionDocumentVersion"
+          }
+        ],
+        "notes": [],
+        "instanceType": "StudyDefinitionDocument"
+      }
+    ],
+    "instanceType": "Study"
+  },
+  "usdmVersion": "3.11.0",
+  "systemName": null,
+  "systemVersion": null
+}

@@ -12,6 +12,10 @@ async def create_study_arm(study_designs: list, study_uid: str):
         keywords = ["placebo", "investigational", "comparator", "observational"]
         arm_type_decode = arm.get("type", {}).get("decode", "").lower()
 
+        arm_type_decode = (
+            "investigational" if "treatment" in arm_type_decode else arm_type_decode
+        )  # todo: hardcoded investigational if arm type decode contains treatment
+
         async with httpx.AsyncClient() as client:
             response = await client.get(
                 f"{settings.osb_base_url}/ct/terms?codelist_name=Arm%20Type&is_sponsor=false&page_number=1&page_size=100"
@@ -36,4 +40,5 @@ async def create_study_arm(study_designs: list, study_uid: str):
                                 code=arm.get("name", ""),
                                 description=arm.get("description", ""),
                             )
+
     print("Study arms created successfully.")

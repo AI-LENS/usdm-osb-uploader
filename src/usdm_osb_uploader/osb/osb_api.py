@@ -700,11 +700,30 @@ async def create_study_structure_study_visit(
     max_visit_window_value: str = "0",
     visit_window_unit_uid: str = "UnitDefinition_000364",
 ):
+    # get global anchor visit ct
+    async with httpx.AsyncClient(timeout=60) as client:
+        resp = await client.get(
+            settings.osb_base_url
+            + "/ct/terms?codelist_name=Time+Point+Reference&filters={%22attributes.name_submission_value%22:{%22v%22:[%22GLOBAL%20ANCHOR%20VISIT%20REFERENCE%22],%22op%22:%22eq%22}}"
+        )
+        resp.raise_for_status()
+        data = resp.json()
+        time_reference_uid = data["items"][0]["term_uid"]
+
+    async with httpx.AsyncClient(timeout=60) as client:
+        resp = await client.get(
+            settings.osb_base_url
+            + "/ct/terms?codelist_name=Epoch+Allocation&filters={%22attributes.name_submission_value%22:{%22v%22:[%22PREVIOUS%20VISIT%22],%22op%22:%22eq%22}}"
+        )
+        resp.raise_for_status()
+        data = resp.json()
+        epoch_allocation_uid = data["items"][0]["term_uid"]
+
     preview_endpoint = (
         f"{settings.osb_base_url}/studies/{study_uid}/study-visits/preview"
     )
     req_body = {
-        "is_global_anchor_visit": is_global_anchor_visit,
+        "is_global_anchor_visit": False,
         "visit_class": "SINGLE_VISIT",
         "show_visit": True,
         "min_visit_window_value": min_visit_window_value,
@@ -712,26 +731,16 @@ async def create_study_structure_study_visit(
         "visit_subclass": "SINGLE_VISIT",
         "visit_window_unit_uid": visit_window_unit_uid,
         "study_epoch_uid": study_epoch_uid,
-        "epoch_allocation_uid": "CTTerm_000201",
+        "epoch_allocation_uid": epoch_allocation_uid,
         "visit_type_uid": visit_type_uid,
         "visit_contact_mode_uid": visit_contact_mode_uid,
-        "time_reference_uid": "CTTerm_000126",
+        "time_reference_uid": time_reference_uid,
         "time_value": time_value,
         "time_unit_uid": time_unit_uid,
         "description": description,
     }
-    async with httpx.AsyncClient() as client:
+    async with httpx.AsyncClient(timeout=60) as client:
         response = await client.post(preview_endpoint, json=req_body)
-        if (
-            response.status_code == 422
-            or response.status_code == 400
-            or response.status_code == 404
-            or response.status_code == 409
-            or response.status_code == 500
-        ):
-            raise Exception(
-                f"Failed to create study visit preview: {response.status_code} - {response.text}"
-            )
         response.raise_for_status()
         preview = response.json()
 
@@ -740,19 +749,11 @@ async def create_study_structure_study_visit(
     submit_req_body = req_body.copy()
     submit_req_body["study_day_label"] = preview["study_day_label"]
     submit_req_body["study_week_label"] = preview["study_week_label"]
-    submit_req_body["is_global_anchor_visit"] = is_global_anchor_visit
-    async with httpx.AsyncClient() as client:
+    if is_global_anchor_visit:
+        submit_req_body["is_global_anchor_visit"] = is_global_anchor_visit
+
+    async with httpx.AsyncClient(timeout=60) as client:
         response = await client.post(submit_endpoint, json=submit_req_body)
-        if (
-            response.status_code == 422
-            or response.status_code == 400
-            or response.status_code == 404
-            or response.status_code == 409
-            or response.status_code == 500
-        ):
-            raise Exception(
-                f"Failed to create study visit: {response.status_code} - {response.text}"
-            )
         response.raise_for_status()
         return response.json()
 
@@ -879,5 +880,36 @@ async def create_study_activity_schedule(
                 f"Failed to create activity schedule: {response.status_code} - {response.text}"
             )
 
+        response.raise_for_status()
+        return response.json()
+
+
+async def create_study_activities_batch(
+    study_uid: str,
+    activity_uid: str,
+    activity_group_uid: str,
+    activity_subgroup_uid: str,
+    soa_group_term_uid: str,
+):  # study_objective
+    endpoint = f"{settings.osb_base_url}/studies/{study_uid}/study-activities/batch"
+    req_body = [
+        {
+            "method": "POST",
+            "content": {
+                "soa_group_term_uid": soa_group_term_uid,
+                "activity_uid": activity_uid,
+                "order": None,
+                "activity_group_uid": activity_group_uid,
+                "activity_subgroup_uid": activity_subgroup_uid,
+            },
+        }
+    ]
+
+    async with httpx.AsyncClient(timeout=60) as client:
+        response = await client.post(endpoint, json=req_body)
+        if response.status_code == 422 or response.status_code == 404:
+            raise Exception(
+                f"Failed to create study objective - Invalid data: {response.status_code} - {response.text}"
+            )
         response.raise_for_status()
         return response.json()

@@ -39,6 +39,18 @@ cd usdm-osb-uploader
 uv sync
 ```
 
+3. Set up environment variables:
+   - Copy `env_example.txt` to `.env`:
+   ```bash
+   cp env_example.txt .env
+   ```
+   - Edit `.env` and set your OSB server URL:
+   ```
+   OSB_BASE_URL="https://your-osb-instance.com/api"
+   ```
+   
+   **Note:** The `.env` file is used to configure the OSB API endpoint. The `env_example.txt` file contains a template with the default public OSB server URL (`https://osb.ailens.ai/api`). You can use your own OSB server URL by replacing it in the `.env` file.
+
 
 ## Usage
 
@@ -67,10 +79,24 @@ uv run osb download-usdm-cmd STUDY_UID
 
 ### Configuration
 
+The application uses a `.env` file for configuration. After copying `env_example.txt` to `.env`, you can modify the `OSB_BASE_URL` variable to point to your OSB instance.
+
+Alternatively, you can set environment variables directly:
 ```bash
 export OSB_BASE_URL="https://your-osb-instance.com/api"
 ```
 
+
+## Test Files
+
+The repository includes sample USDM study files in the `test/` directory for testing and development purposes:
+
+- `CDISC_Pilot_Study.json` - CDISC pilot study example
+- `Study_000105_usdm.json` - Sample study data
+- `Study_000106_usdm.json` - Sample study data
+- `Alexion_NCT04573309_Wilsons.json` - Alexion study example
+
+These files can be used to test the uploader functionality and understand the expected USDM format.
 
 ## Contributing
 

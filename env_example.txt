@@ -1,0 +1,2 @@
+# This is our public OSB server. You can use your own OSB server URL by replacing it in .env file.
+OSB_BASE_URL="https://osb.ailens.ai/api"

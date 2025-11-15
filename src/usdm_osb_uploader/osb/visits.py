@@ -22,15 +22,15 @@ def extract_day_or_week_value_dynamic_with_anchor_flag(timings: list) -> dict:
             results[enc_id] = (0, "day")
             continue
 
-        day_match = re.search(r"day\s*(-?\d+)", label)
-        week_match = re.search(r"week\s*(-?\d+)", label)
+        day_match = re.search(r"(?:day\s*(-?\d+)|(-?\d+)\s*days?)", value_label)
+        week_match = re.search(r"(?:week\s*(-?\d+)|(-?\d+)\s*weeks?)", value_label)
 
         if day_match:
-            val = int(day_match.group(1))
+            val = int(day_match.group(1) or day_match.group(2))
             results[enc_id] = (val if anchor_found else -abs(val), "day")
             continue
         elif week_match:
-            val = int(week_match.group(1))
+            val = int(week_match.group(1) or week_match.group(2))
             results[enc_id] = (val if anchor_found else -abs(val), "week")
             continue
 
@@ -99,6 +99,7 @@ async def create_study_visits(study_designs: list, study_uid: str):
 
     encounter_timing_map = finalize_timing_integration(schedule, encounters)
     epoch_first_visit_flag = defaultdict(lambda: True)
+    print(encounter_timing_map)
 
     first_unit = None
     for timing_data in encounter_timing_map.values():
@@ -142,6 +143,12 @@ async def create_study_visits(study_designs: list, study_uid: str):
             ),
             None,
         )
+
+        epoch_name: str = ""
+        epoch_uid: str = ""
+        epoch_type_name: str = ""
+        visit_type_uid: str = ""
+
         for epoch in epochs:
             if epoch.get("id") == epoch_id:
                 epoch_name = epoch.get("name", "")
@@ -195,17 +202,24 @@ async def create_study_visits(study_designs: list, study_uid: str):
             try:
                 create_response = await create_study_structure_study_visit(
                     study_uid=study_uid,
-                    is_global_anchor_visit=time_val == 0,
                     study_epoch_uid=epoch_uid,
                     visit_type_uid=visit_type_uid,
                     visit_contact_mode_uid=contact_mode_uid,
                     time_value=time_value_in_days,
                     time_unit_uid=time_unit_uid,
+                    visit_window_unit_uid=global_visit_window_unit_uid,
+                    is_global_anchor_visit=time_val == 0,
                     description=description,
                 )
                 # visit_mapping_encounter[enc_id] = create_response.get("uid")
             except Exception as e:
-                print(f"Error creating visit {enc.get('label', enc_id)}: {str(e)}")
+                if (
+                    isinstance(e, httpx.HTTPStatusError)
+                    and e.response.status_code == 409
+                ):
+                    print(f"Visit {enc.get('label', enc_id)} already exists")
+                else:
+                    print(f"Error creating visit {enc.get('label', enc_id)}: {str(e)}")
         else:
             continue
 
@@ -219,6 +233,12 @@ async def create_study_visits(study_designs: list, study_uid: str):
             ),
             None,
         )
+
+        epoch_name: str = ""
+        epoch_uid: str = ""
+        epoch_type_name: str = ""
+        visit_type_uid: str = ""
+
         for epoch in epochs:
             if epoch.get("id") == epoch_id:
                 epoch_name = epoch.get("name", "")
@@ -233,7 +253,6 @@ async def create_study_visits(study_designs: list, study_uid: str):
                 f"{settings.osb_base_url}/ct/terms/names?page_size=0&codelist_name=VisitType"
             )
             for item in visit_type_response.json().get("items", []):
-                print(item.get("sponsor_preferred_name", ""))
                 if (
                     item.get("sponsor_preferred_name", "").lower()
                     == epoch_type_name.lower()
@@ -271,17 +290,24 @@ async def create_study_visits(study_designs: list, study_uid: str):
             try:
                 create_response = await create_study_structure_study_visit(  # noqa: F841
                     study_uid=study_uid,
-                    is_global_anchor_visit=time_val == 0,
                     study_epoch_uid=epoch_uid,
                     visit_type_uid=visit_type_uid,
                     visit_contact_mode_uid=contact_mode_uid,
                     time_value=time_value_in_days,
                     time_unit_uid=time_unit_uid,
+                    visit_window_unit_uid=global_visit_window_unit_uid,
+                    is_global_anchor_visit=time_val == 0,
                     description=description,
                 )
                 # visit_mapping_encounter[enc_id] = create_response.get("uid")
             except Exception as e:
-                print(f"Error creating visit {enc.get('label', enc_id)}: {str(e)}")
+                if (
+                    isinstance(e, httpx.HTTPStatusError)
+                    and e.response.status_code == 409
+                ):
+                    print(f"Visit {enc.get('label', enc_id)} already exists")
+                else:
+                    print(f"Error creating visit {enc.get('label', enc_id)}: {str(e)}")
         else:
             continue
 

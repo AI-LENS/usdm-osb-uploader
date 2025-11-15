@@ -79,6 +79,7 @@ async def create_study_objective_endpoint(study_design: dict, study_uid: str):
                 response = await client.get(
                     f"{settings.osb_base_url}/ct/terms?codelist_uid=CTCodelist_000004&page_number=1&page_size=1000"
                 )
+                endpoint_level_uid = None
                 for item in response.json().get("items", []):
                     if (
                         item.get("name", {}).get("sponsor_preferred_name", "").lower()

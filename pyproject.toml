@@ -24,3 +24,6 @@ build-backend = "hatchling.build"
 dev = [
   "pre-commit>=4.3.0",
 ]
+
+[tool.poe.tasks]
+precmt = "pre-commit run --all-files"

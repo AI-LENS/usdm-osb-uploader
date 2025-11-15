@@ -5,22 +5,9 @@ import httpx
 from ..settings import settings
 from .osb_api import (
     create_study_activities_approvals,
+    create_study_activities_batch,
     create_study_activities_concept,
-    create_study_activity_api,
 )
-
-
-async def get_posted_study_activity_uids(study_uid: str):
-    headers = {"accept": "application/json, text/plain, */*"}
-    endpoint = f"{settings.osb_base_url}/studies/{study_uid}/study-activities?page_number=1&page_size=1000"
-    async with httpx.AsyncClient() as client:
-        response = await client.get(endpoint, headers=headers)
-        if response.status_code != 200:
-            return set()
-        items = response.json().get("items", [])
-        return set(
-            item["study_activity_uid"] for item in items if "study_activity_uid" in item
-        )
 
 
 async def search_frontend_activity(name):
@@ -86,20 +73,6 @@ async def get_or_create_group(group_name):
                 except Exception as e:
                     print(f"Failed to approve group {group_uid}: {e}")
                 return group_uid
-
-
-async def create_activity_if_not_exist(name, group_uid, subgroup_uid):
-    create_response = await create_study_activities_concept(
-        name=name,
-        group_uid=group_uid,
-        subgroup_uid=subgroup_uid,
-        request_rationale="",
-        is_data_collected=False,
-        flowchat_group={},
-    )
-    activity_uid = create_response.get("uid")
-    await create_study_activities_approvals(activity_uid)
-    return activity_uid
 
 
 async def get_or_create_subgroup(subgroup_name, group_uid):
@@ -169,9 +142,133 @@ async def match_synonym_to_activity(synonyms):
     return None
 
 
+async def find_existing_activity_by_name(activity_name: str, library_name: str):
+    """Helper function to find existing activity by name and check status"""
+    endpoint = f"{settings.osb_base_url}/concepts/activities/activities"
+
+    params = {
+        "library_name": library_name,
+        "page_size": 1000,
+    }
+
+    async with httpx.AsyncClient() as client:
+        response = await client.get(endpoint, params=params)
+        if response.status_code == 200:
+            data = response.json()
+            # Find activity by name (case-insensitive)
+            for item in data.get("items", []):
+                if item.get("name", "").lower() == activity_name.lower():
+                    return item
+        return None
+
+
+async def create_study_activities(
+    study_uid: str,
+    name: str,
+    group_uid: str,
+    subgroup_uid: str,
+    soa_group_term_uid: str,
+):
+    response = None
+    concept_already_exists = False
+
+    try:
+        response = await create_study_activities_concept(
+            name=name,
+            group_uid=group_uid,
+            subgroup_uid=subgroup_uid,
+            request_rationale="New activity",
+            is_data_collected=False,
+            flowchat_group={},
+        )
+    except Exception as e:
+        error_message = str(e)
+        if "409" in error_message:
+            print(
+                f"Activity concept already exists for '{name}', fetching existing activity..."
+            )
+            concept_already_exists = True
+            existing_activity = await find_existing_activity_by_name(
+                activity_name=name,
+                library_name="Requested",
+            )
+            if existing_activity:
+                response = existing_activity
+                print(f"Found existing activity with UID: {response.get('uid')}")
+            else:
+                print(f"Error: Activity '{name}' already exists but could not be found")
+                return None
+        else:
+            print(f"Error creating study activities concept: {e}")
+            return None
+
+    if not response or not response.get("uid"):
+        print("Error: No valid response or UID from concept creation")
+        return None
+
+    activity_uid = response.get("uid")
+    approval_response = None
+
+    if concept_already_exists:
+        activity_status = response.get("status", "").lower()
+        if activity_status == "final":
+            print(f"Activity '{name}' is already approved (status: Final)")
+            approval_response = response
+        else:
+            try:
+                approval_response = await create_study_activities_approvals(
+                    activity_uid=activity_uid
+                )
+                print(f"Created approvals for existing activity '{name}'")
+            except Exception as e:
+                error_message = str(e)
+                if "400" in error_message or "422" in error_message:
+                    print(
+                        f"Approvals may already exist for '{name}', checking status..."
+                    )
+                    if activity_status in ["final", "approved"]:
+                        approval_response = response
+                    else:
+                        print(
+                            f"Error: Activity '{name}' exists but is not approved and approvals creation failed: {e}"
+                        )
+                        return None
+                else:
+                    print(f"Error creating study activities approvals: {e}")
+                    return None
+    else:
+        try:
+            approval_response = await create_study_activities_approvals(
+                activity_uid=activity_uid
+            )
+        except Exception as e:
+            print(f"Error creating study activities approvals: {e}")
+            return None
+
+    if not approval_response or not approval_response.get("uid"):
+        print("Error: No valid approval response or UID")
+        return None
+
+    try:
+        batch_response = await create_study_activities_batch(
+            study_uid=study_uid,
+            activity_uid=approval_response.get("uid"),
+            activity_group_uid=approval_response.get("activity_groupings", [{}])[0].get(
+                "activity_group_uid", ""
+            ),
+            activity_subgroup_uid=approval_response.get("activity_groupings", [{}])[
+                0
+            ].get("activity_subgroup_uid", ""),
+            soa_group_term_uid=soa_group_term_uid,
+        )
+    except Exception as e:
+        print(f"Error creating study activities batch: {e}")
+        return None
+    return batch_response
+
+
 async def create_study_activity(version: list, study_uid: str, study_number: str):
     design = version.get("studyDesigns", [])
-    posted_uids = await get_posted_study_activity_uids(study_uid)
 
     for des in design:
         activities = des.get("activities", [])
@@ -200,27 +297,26 @@ async def create_study_activity(version: list, study_uid: str, study_number: str
                         matched_act = await search_frontend_activity(name=child_label)
                         if matched_act:
                             grouping = matched_act.get("activity_groupings", [])[0]
-                            await create_study_activity_api(
+                            await create_study_activities(
                                 study_uid=study_uid,
-                                group_uid=grouping.get("activity_grouping_uid"),
-                                subgroup_uid=grouping.get("activity_subgrouping_uid"),
-                                activity_uid=matched_act.get("uid"),
-                                posted_uids=posted_uids,
+                                name=name,
+                                group_uid=str(grouping.get("activity_grouping_uid")),
+                                subgroup_uid=str(
+                                    grouping.get("activity_subgrouping_uid")
+                                ),
+                                soa_group_term_uid="CTTerm_000067",  # Todo: hardcoded soa group term uid
                             )
                         else:
                             group_id = await get_or_create_group(group_name=description)
                             subgroup_id = await get_or_create_subgroup(
                                 subgroup_name=description, group_uid=group_id
                             )
-                            activity_uid = await create_activity_if_not_exist(
-                                name=name, group_uid=group_id, subgroup_uid=subgroup_id
-                            )
-                            await create_study_activity_api(
+                            await create_study_activities(
                                 study_uid=study_uid,
-                                group_uid=group_id,
-                                subgroup_uid=subgroup_id,
-                                activity_uid=activity_uid,
-                                posted_uids=posted_uids,
+                                name=name,
+                                group_uid=str(group_id),
+                                subgroup_uid=str(subgroup_id),
+                                soa_group_term_uid="CTTerm_000067",  # Todo: hardcoded soa group term uid
                             )
 
                     else:
@@ -239,42 +335,45 @@ async def create_study_activity(version: list, study_uid: str, study_number: str
                                 )
                                 if match:
                                     grouping = match.get("activity_groupings", [])[0]
-                                    await create_study_activity_api(
+                                    await create_study_activities(
                                         study_uid=study_uid,
-                                        group_uid=grouping.get("activity_grouping_uid"),
-                                        subgroup_uid=grouping.get(
-                                            "activity_subgrouping_uid"
+                                        name=name,
+                                        group_uid=str(
+                                            grouping.get("activity_grouping_uid")
                                         ),
-                                        activity_uid=match.get("uid"),
-                                        posted_uids=posted_uids,
+                                        subgroup_uid=str(
+                                            grouping.get("activity_subgrouping_uid")
+                                        ),
+                                        soa_group_term_uid="CTTerm_000067",  # Todo: hardcoded soa group term uid
                                     )
             else:
                 if not bc_ids:
                     matched_act = await search_frontend_activity(name=name)
                     if matched_act:
                         grouping = matched_act.get("activity_groupings", [])[0]
-                        await create_study_activity_api(
-                            study_uid=study_uid,
-                            group_uid=grouping.get("activity_group_uid"),
-                            subgroup_uid=grouping.get("activity_subgroup_uid"),
-                            activity_uid=matched_act.get("uid"),
-                            posted_uids=posted_uids,
-                        )
+                        try:
+                            await create_study_activities(
+                                study_uid=study_uid,
+                                name=name,
+                                group_uid=str(grouping.get("activity_group_uid")),
+                                subgroup_uid=str(grouping.get("activity_subgroup_uid")),
+                                soa_group_term_uid="CTTerm_000067",  # Todo: hardcoded soa group term uid
+                            )
+                        except Exception as e:
+                            print(f"Failed to create study activity: {e}")
+
                     else:
-                        tbd_name = f"TBD_{study_number}"
+                        tbd_name = f"TBD_{study_number}"  # Todo: hardcoded tbd name
                         group_id = await get_or_create_group(tbd_name)
                         subgroup_id = await get_or_create_subgroup(
                             subgroup_name=tbd_name, group_uid=group_id
                         )
-                        activity_uid = await create_activity_if_not_exist(
-                            name=name, group_uid=group_id, subgroup_uid=subgroup_id
-                        )
-                        await create_study_activity_api(
+                        await create_study_activities(
                             study_uid=study_uid,
-                            group_uid=group_id,
-                            subgroup_uid=subgroup_id,
-                            activity_uid=activity_uid,
-                            posted_uids=posted_uids,
+                            name=name,
+                            group_uid=str(group_id),
+                            subgroup_uid=str(subgroup_id),
+                            soa_group_term_uid="CTTerm_000067",  # Todo: hardcoded soa group term uid
                         )
                 else:
                     for bc_id in bc_ids:
@@ -288,11 +387,13 @@ async def create_study_activity(version: list, study_uid: str, study_number: str
                             )
                             if match:
                                 grouping = match.get("activity_groupings", [])[0]
-                                await create_study_activity_api(
+                                await create_study_activities(
                                     study_uid=study_uid,
-                                    group_uid=grouping.get("activity_group_uid"),
-                                    subgroup_uid=grouping.get("activity_subgroup_uid"),
-                                    activity_uid=match.get("uid"),
-                                    posted_uids=posted_uids,
+                                    name=name,
+                                    group_uid=str(grouping.get("activity_group_uid")),
+                                    subgroup_uid=str(
+                                        grouping.get("activity_subgroup_uid")
+                                    ),
+                                    soa_group_term_uid="CTTerm_000067",  # Todo: hardcoded soa group term uid
                                 )
     print("Study activities created successfully.")
