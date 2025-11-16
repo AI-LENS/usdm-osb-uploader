@@ -41,7 +41,7 @@ async def create_study_objective_endpoint(study_design: dict, study_uid: str):
                     break
 
         create_response = await create_study_objective_create_objective(  # noqa: F841
-            study_uid=study_uid, uid=template_uid, objective_level_uid=level_uid
+            study_uid=study_uid, uid=template_uid, objective_level_uid=None
         )
 
         endpoint = f"{settings.osb_base_url}/studies/{study_uid}/study-objectives"
