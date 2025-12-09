@@ -3,7 +3,13 @@ import json
 from cyclopts import App
 from pydantic import FilePath
 from rich.console import Console
-from rich.progress import Progress, SpinnerColumn, TextColumn, BarColumn, TaskProgressColumn
+from rich.progress import (
+    BarColumn,
+    Progress,
+    SpinnerColumn,
+    TaskProgressColumn,
+    TextColumn,
+)
 
 from .osb.activities import create_study_activity
 from .osb.arms import create_study_arm
@@ -32,24 +38,51 @@ def load_study_design(usdm_file: FilePath):
 async def usdm_osb_uploader(usdm_file: FilePath):
     """Upload a USDM file to the OSB system."""
     usdm_data = load_study_design(usdm_file)
-    
+
     # Define all the steps with their descriptions
     steps = [
         ("Loading study data", lambda: None),
         ("Creating study ID", lambda: create_study_id(usdm_data)),
-        ("Creating high level design", lambda: create_study_high_level_design(study_designs, study_uid)),
+        (
+            "Creating high level design",
+            lambda: create_study_high_level_design(study_designs, study_uid),
+        ),
         ("Creating study arms", lambda: create_study_arm(study_designs, study_uid)),
-        ("Creating study epochs", lambda: create_study_epochs(study_designs, study_uid)),
-        ("Creating study elements", lambda: create_study_element(study_designs, study_uid)),
-        ("Creating study visits", lambda: create_study_visits(study_designs, study_uid)),
-        ("Creating study populations", lambda: create_study_population(study_designs, study_uid)),
-        ("Creating study criteria", lambda: create_study_criteria(study_version, study_uid)),
-        ("Creating objectives & endpoints", lambda: create_study_objective_endpoint(study_designs, study_uid)),
-        ("Creating study activities", lambda: create_study_activity(study_version, study_uid, study_id)),
-        ("Creating schedule of activities", lambda: create_schedule_of_activity(study_designs, study_uid)),
-        ("Downloading USDM", lambda: download_usdm(study_uid))
+        (
+            "Creating study epochs",
+            lambda: create_study_epochs(study_designs, study_uid),
+        ),
+        (
+            "Creating study elements",
+            lambda: create_study_element(study_designs, study_uid),
+        ),
+        (
+            "Creating study visits",
+            lambda: create_study_visits(study_designs, study_uid),
+        ),
+        (
+            "Creating study populations",
+            lambda: create_study_population(study_designs, study_uid),
+        ),
+        (
+            "Creating study criteria",
+            lambda: create_study_criteria(study_version, study_uid),
+        ),
+        (
+            "Creating objectives & endpoints",
+            lambda: create_study_objective_endpoint(study_designs, study_uid),
+        ),
+        (
+            "Creating study activities",
+            lambda: create_study_activity(study_version, study_uid, study_id),
+        ),
+        (
+            "Creating schedule of activities",
+            lambda: create_schedule_of_activity(study_designs, study_uid),
+        ),
+        ("Downloading USDM", lambda: download_usdm(study_uid)),
     ]
-    
+
     with Progress(
         SpinnerColumn(),
         TextColumn("[progress.description]{task.description}"),
@@ -57,93 +90,92 @@ async def usdm_osb_uploader(usdm_file: FilePath):
         TaskProgressColumn(),
         console=console,
     ) as progress:
-        
         # Create overall progress task
         overall_task = progress.add_task("Overall Progress", total=len(steps))
-        
+
         # Step 1: Load study data (already done)
         current_task = progress.add_task(steps[0][0], total=1)
         progress.update(current_task, advance=1)
         progress.update(overall_task, advance=1)
-        
+
         # Step 2: Create study ID
         current_task = progress.add_task(steps[1][0], total=1)
         study_uid, study_id = await create_study_id(usdm_data)
         progress.update(current_task, advance=1)
         progress.update(overall_task, advance=1)
-        
+
         # Prepare data for subsequent steps
         study_version = usdm_data.get("study", {}).get("versions", [])[0]
         study_designs = (
             usdm_data.get("study", {}).get("versions", [])[0].get("studyDesigns", [])
         )
-        
+
         # Step 3: High level design
         current_task = progress.add_task(steps[2][0], total=1)
         await create_study_high_level_design(study_designs, study_uid)
         progress.update(current_task, advance=1)
         progress.update(overall_task, advance=1)
-        
+
         # Step 4: Study arms
         current_task = progress.add_task(steps[3][0], total=1)
         await create_study_arm(study_designs, study_uid)
         progress.update(current_task, advance=1)
         progress.update(overall_task, advance=1)
-        
+
         # Step 5: Study epochs
         current_task = progress.add_task(steps[4][0], total=1)
         await create_study_epochs(study_designs, study_uid)
         progress.update(current_task, advance=1)
         progress.update(overall_task, advance=1)
-        
+
         # Step 6: Study elements
         current_task = progress.add_task(steps[5][0], total=1)
         await create_study_element(study_designs, study_uid)
         progress.update(current_task, advance=1)
         progress.update(overall_task, advance=1)
-        
+
         # Step 7: Study visits
         current_task = progress.add_task(steps[6][0], total=1)
         await create_study_visits(study_designs, study_uid)
         progress.update(current_task, advance=1)
         progress.update(overall_task, advance=1)
-        
+
         # Step 8: Study populations
         current_task = progress.add_task(steps[7][0], total=1)
         await create_study_population(study_designs, study_uid)
         progress.update(current_task, advance=1)
         progress.update(overall_task, advance=1)
-        
+
         # Step 9: Study criteria
         current_task = progress.add_task(steps[8][0], total=1)
         await create_study_criteria(study_version, study_uid)
         progress.update(current_task, advance=1)
         progress.update(overall_task, advance=1)
-        
+
         # Step 10: Objectives & endpoints
         current_task = progress.add_task(steps[9][0], total=1)
         await create_study_objective_endpoint(study_designs, study_uid)
         progress.update(current_task, advance=1)
         progress.update(overall_task, advance=1)
-        
+
         # Step 11: Study activities
         current_task = progress.add_task(steps[10][0], total=1)
         await create_study_activity(study_version, study_uid, study_id)
         progress.update(current_task, advance=1)
         progress.update(overall_task, advance=1)
-        
+
         # Step 12: Schedule of activities
         current_task = progress.add_task(steps[11][0], total=1)
         await create_schedule_of_activity(study_designs, study_uid)
         progress.update(current_task, advance=1)
         progress.update(overall_task, advance=1)
-        
+
         # Step 13: Download USDM
         current_task = progress.add_task(steps[12][0], total=1)
         await download_usdm(study_uid)
         progress.update(current_task, advance=1)
         progress.update(overall_task, advance=1)
-    
+
     console.print("✅ [bold green]USDM upload completed successfully![/bold green]")
 
 
