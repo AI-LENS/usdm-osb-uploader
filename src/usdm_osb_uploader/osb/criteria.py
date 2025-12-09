@@ -10,7 +10,7 @@ from .osb_api import (
 )
 
 
-async def create_study_criteria(study_version: list, study_uid: str):
+async def create_study_criteria(study_version: dict, study_uid: str):
     study_designs = study_version.get("studyDesigns", [])
     criteria_texts = study_version.get("eligibilityCriterionItems", [])
     text_map = {c["id"]: c["text"] for c in criteria_texts}
