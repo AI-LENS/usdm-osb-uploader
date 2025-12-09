@@ -267,7 +267,26 @@ async def create_study_activities(
     return batch_response
 
 
-async def create_study_activity(version: list, study_uid: str, study_number: str):
+async def create_study_activity(version: list, study_id: str):
+    headers = {"accept": "application/json, text/plain, */*"}
+    study_uid = None
+    endpoint = f"{settings.osb_base_url}/studies/list?minimal=true"
+    async with httpx.AsyncClient() as client:
+        response = await client.get(endpoint, headers=headers)
+        if response.status_code == 200:
+            study_data = response.json()
+            for item in study_data:
+                if item.get("id") == study_id:
+                    study_uid = item.get("uid", "")
+                    # print(f"Study UID: {study_uid}")
+                    break
+            else:
+                raise Exception(f"Study ID not found: {study_id}")
+        else:
+            raise Exception(
+                f"Failed to get study data: {response.status_code} - {response.text}"
+            )
+
     design = version.get("studyDesigns", [])
 
     for des in design:
@@ -363,7 +382,7 @@ async def create_study_activity(version: list, study_uid: str, study_number: str
                             print(f"Failed to create study activity: {e}")
 
                     else:
-                        tbd_name = f"TBD_{study_number}"  # Todo: hardcoded tbd name
+                        tbd_name = f"TBD_{study_id}"  # Todo: hardcoded tbd name
                         group_id = await get_or_create_group(tbd_name)
                         subgroup_id = await get_or_create_subgroup(
                             subgroup_name=tbd_name, group_uid=group_id

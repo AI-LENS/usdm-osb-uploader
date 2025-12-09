@@ -42,7 +42,26 @@ async def fetch_existing_study_activities(study_uid: str):
     return activities
 
 
-async def create_schedule_of_activity(study_designs: list, study_uid: str):
+async def create_schedule_of_activity(study_designs: list, study_id: str):
+    headers = {"accept": "application/json, text/plain, */*"}
+    endpoint = f"{settings.osb_base_url}/studies/list?minimal=true"
+    study_uid = None
+    async with httpx.AsyncClient() as client:
+        response = await client.get(endpoint, headers=headers)
+        if response.status_code == 200:
+            study_data = response.json()
+            for item in study_data:
+                if item.get("id") == study_id:
+                    study_uid = item.get("uid", "")
+                    # print(f"Study UID: {study_uid}")
+                    break
+            else:
+                raise Exception(f"Study ID not found: {study_id}")
+        else:
+            raise Exception(
+                f"Failed to get study data: {response.status_code} - {response.text}"
+            )
+
     design = study_designs[0]
     schedule = design.get("scheduleTimelines", [])[0]
     instances = schedule.get("instances", [])

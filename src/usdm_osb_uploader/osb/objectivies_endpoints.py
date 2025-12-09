@@ -11,8 +11,26 @@ from .osb_api import (
 )
 
 
-async def create_study_objective_endpoint(study_design: dict, study_uid: str):
+async def create_study_objective_endpoint(study_design: dict, study_id: str):
     headers = {"accept": "application/json, text/plain, */*"}
+    study_uid = None
+    endpoint = f"{settings.osb_base_url}/studies/list?minimal=true"
+    async with httpx.AsyncClient() as client:
+        response = await client.get(endpoint, headers=headers)
+        if response.status_code == 200:
+            study_data = response.json()
+            for item in study_data:
+                if item.get("id") == study_id:
+                    study_uid = item.get("uid", "")
+                    # print(f"Study UID: {study_uid}")
+                    break
+            else:
+                raise Exception(f"Study ID not found: {study_id}")
+        else:
+            raise Exception(
+                f"Failed to get study data: {response.status_code} - {response.text}"
+            )
+
     design = study_design[0]
     objectives = design.get("objectives", [])
     level_uid = None
