@@ -15,6 +15,7 @@ async def create_study_objective_endpoint(study_design: dict, study_uid: str):
     headers = {"accept": "application/json, text/plain, */*"}
     design = study_design[0]
     objectives = design.get("objectives", [])
+    level_uid = None
 
     for obj in objectives:
         template_response = await create_study_purpose_objective_templates(
@@ -41,7 +42,7 @@ async def create_study_objective_endpoint(study_design: dict, study_uid: str):
                     break
 
         create_response = await create_study_objective_create_objective(  # noqa: F841
-            study_uid=study_uid, uid=template_uid, objective_level_uid=None
+            study_uid=study_uid, uid=template_uid, objective_level_uid=level_uid
         )
 
         endpoint = f"{settings.osb_base_url}/studies/{study_uid}/study-objectives"

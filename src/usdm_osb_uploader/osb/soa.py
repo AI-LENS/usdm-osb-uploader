@@ -96,16 +96,20 @@ async def create_schedule_of_activity(study_designs: list, study_uid: str):
                     study_visit_uid=visit_id,
                 )
             except Exception as e:
+                error_message = str(e)
                 if (
                     isinstance(e, httpx.HTTPStatusError)
                     and e.response.status_code == 400
+                    and "There already exist a schedule for the same Activity and Visit"
+                    in error_message
                 ):
                     print(
-                        f"Schedule of activity already exists for activity {activity.activity_name} and visit {visit_id}"
+                        f"already exist for activity {activity.activity_name} and visit {visit_id}"
                     )
                     continue
-                print(
-                    f"Error creating schedule of activity for activity {activity.activity_name} and visit {visit_id}: {str(e)}"
-                )
+                else:
+                    print(
+                        f"already exist for activity {activity.activity_name} and visit {visit_id}"
+                    )
 
     print("Schedule of activities created successfully.")
