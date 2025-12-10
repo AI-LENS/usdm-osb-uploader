@@ -30,8 +30,14 @@ async def create_study_objective_endpoint(study_design: dict, study_uid: str):
         # print(approval_response.get("uid"))
 
         async with httpx.AsyncClient() as client:
+            res = await client.get(
+                (settings.osb_base_url)
+                + '/ct/codelists?total_count=true&library_name=Sponsor&catalogue_name=SDTM+CT&filters={"attributes.submission_value":{"v":["OBJTLEVL"],"op":"eq"}}'
+            )
+            data = res.json()
+            level_uid = data.get("items", [])[0].get("codelist_uid")
             response = await client.get(
-                f"{settings.osb_base_url}/ct/terms?codelist_uid=CTCodelist_000003&page_number=1&page_size=1000"
+                f"{settings.osb_base_url}/ct/terms?codelist_uid={level_uid}&page_number=1&page_size=1000"
             )
             for item in response.json().get("items", []):
                 if (
@@ -77,8 +83,15 @@ async def create_study_objective_endpoint(study_design: dict, study_uid: str):
             )  # noqa: F841
 
             async with httpx.AsyncClient() as client:
+                resp = await client.get(
+                    (settings.osb_base_url)
+                    + "/ct/codelists?total_count=true&library_name=Sponsor&catalogue_name=SDTM+CT&filters={%22attributes.submission_value%22:{%22v%22:[%22ENDPLEVL%22],%22op%22:%22eq%22}}"
+                )
+                resp.raise_for_status()
+                data = resp.json()
+                endpoint_codelist_uid = data.get("items", [])[0].get("codelist_uid")
                 response = await client.get(
-                    f"{settings.osb_base_url}/ct/terms?codelist_uid=CTCodelist_000004&page_number=1&page_size=1000"
+                    f"{settings.osb_base_url}/ct/terms?codelist_uid={endpoint_codelist_uid}&page_number=1&page_size=1000"
                 )
                 endpoint_level_uid = None
                 for item in response.json().get("items", []):

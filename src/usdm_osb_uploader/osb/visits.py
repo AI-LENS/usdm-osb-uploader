@@ -79,10 +79,20 @@ async def fetch_contact_mode_uid(decode_value: str) -> str:
     preferred_name = decode_map.get(decode_value)
     if not preferred_name:
         return None
-    url = f"{settings.osb_base_url}/api/ct/terms?codelist_name=Visit%20Contact%20Mode&is_sponsor=false&page_number=1&page_size=100"
     headers = {"accept": "application/json, text/plain, */*"}
     async with httpx.AsyncClient() as client:
-        response = await client.get(url, headers=headers)
+        res = await client.get(
+            (settings.osb_base_url)
+            + "/ct/codelists?filters=%7B%22*%22:%7B%22v%22:%5B%22visit+contact+mode%22%5D%7D%7D&library_name=Sponsor"
+        )
+        res.raise_for_status()
+        data = res.json()
+        contact_type_ct_uid = data.get("items", [])[0].get("codelist_uid")
+
+        response = await client.get(
+            f"{settings.osb_base_url}/api/ct/terms?codelist_uid={contact_type_ct_uid}&page_number=1&page_size=1000",
+            headers=headers,
+        )
         if response.status_code == 200:
             for item in response.json().get("items", []):
                 name = item.get("name", {}).get("sponsor_preferred_name", "")
@@ -107,13 +117,9 @@ async def create_study_visits(study_designs: list, study_uid: str):
             first_unit = timing_data["unit"]
             break
 
-    global_visit_window_unit_uid = (  # noqa: F841
-        "UnitDefinition_000364"
-        if first_unit == "day"
-        else "UnitDefinition_000368"
-        if first_unit == "week"
-        else "UnitDefinition_000364"
-    )
+    global_visit_window_unit_uid = (
+        "UnitDefinition_000364" if first_unit == "day" else "UnitDefinition_000368"
+    )  # TODO: hardcoded code
 
     # Sort encounters by time value to ensure proper chronological order
     encounter_time_pairs = []

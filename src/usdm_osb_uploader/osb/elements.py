@@ -29,23 +29,33 @@ async def create_study_element(study_designs: list, study_uid: str):
             "wash out",
             "wash-out",
         ]:
-            code = "CTTerm_000143"
+            code = "CTTerm_000143"  # TODO: hardcoded code
         else:
-            code = "CTTerm_000144"
+            code = "CTTerm_000144"  # TODO: hardcoded code
 
         async with httpx.AsyncClient() as client:
+            res = await client.get(
+                (settings.osb_base_url)
+                + '/ct/codelists?total_count=true&library_name=Sponsor&catalogue_name=SDTM+CT&filters={"attributes.submission_value":{"v":["ELEMSTP"],"op":"eq"}}'
+            )
+            data = res.json()
+            subtype_uid = data.get("items", [])[0].get("codelist_uid")
+
             response = await client.get(
-                f"{settings.osb_base_url}/ct/terms?codelist_uid=CTCodelist_000025&page_number=1&page_size=1000"
+                f"{settings.osb_base_url}/ct/terms?codelist_uid={subtype_uid}&page_number=1&page_size=1000"
             )
             for item in response.json().get("items", []):
                 if (
-                    item.get("name", {}).get("sponsor_preferred_name", "").lower()
-                    == label
+                    item.get("name", {})
+                    .get("sponsor_preferred_name", "")
+                    .lower()
+                    .split("-")[0]
+                    in label.lower()
                 ):
                     subtype_uid = item.get("term_uid")
                     break
                 else:
-                    subtype_uid = "CTTerm_000147"  # Default to "Other"
+                    subtype_uid = "CTTerm_000147"  # TODO: hardcoded code
 
         element_name = name if len(name) > 3 else elem.get("label", "")
 

@@ -17,7 +17,7 @@ async def create_study_population(study_designs: list, study_uid: str):
         # Validate disease condition codes with OSB API
         headers = {"accept": "application/json, text/plain, */*"}
         async with httpx.AsyncClient() as client:
-            endpoint = f"{settings.osb_base_url}/dictionaries/terms?codelist_uid=DictionaryCodelist_000001&page_number=1&page_size=1000"
+            endpoint = f"{settings.osb_base_url}/dictionaries/terms?codelist_uid=DictionaryCodelist_000001&page_number=1&page_size=1000"  # TODO: hardcoded code
             response = await client.get(endpoint, headers=headers)
             if response.status_code == 200:
                 valid_codes = response.json().get("items", [])
@@ -50,7 +50,7 @@ async def create_study_population(study_designs: list, study_uid: str):
         if therapeutic_phase_codes:
             headers = {"accept": "application/json, text/plain, */*"}
             async with httpx.AsyncClient() as client:
-                endpoint = f"{settings.osb_base_url}/dictionaries/terms?codelist_uid=DictionaryCodelist_000001&page_number=1&page_size=1000"
+                endpoint = f"{settings.osb_base_url}/dictionaries/terms?codelist_uid=DictionaryCodelist_000001&page_number=1&page_size=1000"  # TODO: hardcoded code
                 response = await client.get(endpoint, headers=headers)
                 if response.status_code == 200:
                     items = response.json().get("items", [])
@@ -83,7 +83,7 @@ async def create_study_population(study_designs: list, study_uid: str):
         sex_of_participants_code = planned_sex[0].get("code", "")
 
         if sex_of_participants_code:
-            endpoint = f"{settings.osb_base_url}/ct/terms?codelist_uid=C66732"
+            endpoint = f"{settings.osb_base_url}/ct/terms?codelist_uid=C66732"  # TODO: hardcoded code
             headers = {"accept": "application/json, text/plain, */*"}
             async with httpx.AsyncClient() as client:
                 response = await client.get(endpoint, headers=headers)
