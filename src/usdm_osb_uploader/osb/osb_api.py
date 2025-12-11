@@ -739,6 +739,7 @@ async def create_study_structure_study_visit(
         "time_unit_uid": time_unit_uid,
         "description": description,
     }
+    # print(req_body)
     async with httpx.AsyncClient(timeout=60) as client:
         response = await client.post(preview_endpoint, json=req_body)
         response.raise_for_status()

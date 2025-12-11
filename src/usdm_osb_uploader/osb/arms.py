@@ -8,6 +8,7 @@ async def create_study_arm(study_designs: list, study_uid: str):
     response = []
     design = study_designs[0]
     arms = design.get("arms", [])
+    arm_type_uid = None
     for arm in arms:
         keywords = ["placebo", "investigational", "comparator", "observational"]
         arm_type_decode = arm.get("type", {}).get("decode", "").lower()
@@ -17,9 +18,16 @@ async def create_study_arm(study_designs: list, study_uid: str):
         )  # todo: hardcoded investigational if arm type decode contains treatment
 
         async with httpx.AsyncClient() as client:
-            response = await client.get(
-                f"{settings.osb_base_url}/ct/terms?codelist_name=Arm%20Type&is_sponsor=false&page_number=1&page_size=100"
+            res = await client.get(
+                (settings.osb_base_url)
+                + '/ct/codelists?total_count=true&library_name=Sponsor&catalogue_name=SDTM+CT&filters={"attributes.submission_value":{"v":["ARMTTP"],"op":"eq"}}'
             )
+            data = res.json()
+            arm_type_uid = data.get("items", [])[0].get("codelist_uid")
+            response = await client.get(
+                f"{settings.osb_base_url}/ct/terms?codelist_uid={arm_type_uid}&page_number=1&page_size=1000"
+            )
+
         if response.status_code == 200:
             items = response.json().get("items", [])
             for keyword in keywords:
