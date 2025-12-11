@@ -68,10 +68,10 @@ def finalize_timing_integration(schedule: dict, encounters: list) -> dict:
     return result
 
 
-async def fetch_contact_mode_uid(decode_value: str) -> str:
-    decode_map = {"In person": "On Site Visit", "Telephone call": "Phone Contact"}
-    for key, value in decode_map.items():
-        if key.lower() == decode_value.lower():
+async def fetch_contact_mode_uid(code_value: str) -> str:
+    code_map = {"C175574": "On Site Visit", "C171537": "Phone Contact"}
+    for key, value in code_map.items():
+        if key.lower() == code_value.lower():
             preferred_name = value
             break
 
@@ -196,11 +196,9 @@ async def create_study_visits(study_designs: list, study_uid: str):
             label = enc.get("label", "").lower()  # noqa: F841
 
             contact_modes = enc.get("contactModes", [])
-            contact_mode_decode = (
-                contact_modes[0].get("decode") if contact_modes else ""
-            )
+            contact_mode_code = contact_modes[0].get("code") if contact_modes else ""
             contact_mode_uid = await fetch_contact_mode_uid(
-                decode_value=contact_mode_decode
+                code_value=contact_mode_code
             )
 
             is_milestone = epoch_first_visit_flag[epoch_uid]
@@ -281,11 +279,9 @@ async def create_study_visits(study_designs: list, study_uid: str):
             description = enc.get("description", "")
 
             contact_modes = enc.get("contactModes", [])
-            contact_mode_decode = (
-                contact_modes[0].get("decode") if contact_modes else ""
-            )
+            contact_mode_code = contact_modes[0].get("code") if contact_modes else ""
             contact_mode_uid = await fetch_contact_mode_uid(
-                decode_value=contact_mode_decode
+                code_value=contact_mode_code
             )
 
             is_milestone = epoch_first_visit_flag[epoch_uid]  # noqa: F841
