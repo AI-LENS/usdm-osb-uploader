@@ -83,7 +83,7 @@ async def create_study_population(study_designs: list, study_uid: str):
         sex_of_participants_code = planned_sex[0].get("code", "")
 
         if sex_of_participants_code:
-            endpoint = f"{settings.osb_base_url}/ct/terms?codelist_uid=C66732"  # TODO: hardcoded code
+            endpoint = f"{settings.osb_base_url}/ct/terms?codelist_uid=C66732"
             headers = {"accept": "application/json, text/plain, */*"}
             async with httpx.AsyncClient() as client:
                 response = await client.get(endpoint, headers=headers)

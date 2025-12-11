@@ -13,9 +13,11 @@ def extract_day_or_week_value_dynamic_with_anchor_flag(timings: list) -> dict:
 
     for timing in timings:
         enc_id = timing.get("encounterId")
-        label = (timing.get("label") or "").lower()
         value_label = (timing.get("valueLabel") or "").strip().lower()
         description = (timing.get("description") or "").lower()
+
+        if results.get(enc_id):
+            continue
 
         if "anchor" in description:
             anchor_found = True
@@ -33,14 +35,6 @@ def extract_day_or_week_value_dynamic_with_anchor_flag(timings: list) -> dict:
             val = int(week_match.group(1) or week_match.group(2))
             results[enc_id] = (val if anchor_found else -abs(val), "week")
             continue
-
-        val_match = re.search(r"-?\d+", value_label)
-        if val_match:
-            val = int(val_match.group(0))
-            unit = "week" if "week" in label or "week" in value_label else "day"
-            results[enc_id] = (val if anchor_found else -abs(val), unit)
-        else:
-            results[enc_id] = (None, None)
 
     return results
 
@@ -76,7 +70,11 @@ def finalize_timing_integration(schedule: dict, encounters: list) -> dict:
 
 async def fetch_contact_mode_uid(decode_value: str) -> str:
     decode_map = {"In person": "On Site Visit", "Telephone call": "Phone Contact"}
-    preferred_name = decode_map.get(decode_value)
+    for key, value in decode_map.items():
+        if key.lower() == decode_value.lower():
+            preferred_name = value
+            break
+
     if not preferred_name:
         return None
     headers = {"accept": "application/json, text/plain, */*"}
@@ -90,7 +88,7 @@ async def fetch_contact_mode_uid(decode_value: str) -> str:
         contact_type_ct_uid = data.get("items", [])[0].get("codelist_uid")
 
         response = await client.get(
-            f"{settings.osb_base_url}/api/ct/terms?codelist_uid={contact_type_ct_uid}&page_number=1&page_size=1000",
+            f"{settings.osb_base_url}/ct/terms?codelist_uid={contact_type_ct_uid}&page_number=1&page_size=1000",
             headers=headers,
         )
         if response.status_code == 200:
@@ -98,7 +96,6 @@ async def fetch_contact_mode_uid(decode_value: str) -> str:
                 name = item.get("name", {}).get("sponsor_preferred_name", "")
                 if name == preferred_name:
                     return item.get("term_uid")
-    return None
 
 
 async def create_study_visits(study_designs: list, study_uid: str):
@@ -117,9 +114,16 @@ async def create_study_visits(study_designs: list, study_uid: str):
             first_unit = timing_data["unit"]
             break
 
-    global_visit_window_unit_uid = (
-        "UnitDefinition_000364" if first_unit == "day" else "UnitDefinition_000368"
-    )  # TODO: hardcoded code
+    global_visit_window_unit_uid = ""
+    time_unit_response = None
+    async with httpx.AsyncClient() as client:
+        time_unit_response = await client.get(
+            "https://dev-osb.ailens.ai/api/concepts/unit-definitions?subset=Study+Time&sort_by[conversion_factor_to_master]=true&page_size=0"
+        )
+        for item in time_unit_response.json().get("items", []):
+            if item.get("name") == first_unit:
+                global_visit_window_unit_uid = item.get("uid")
+                break
 
     # Sort encounters by time value to ensure proper chronological order
     encounter_time_pairs = []
@@ -182,13 +186,11 @@ async def create_study_visits(study_designs: list, study_uid: str):
         timing_data = encounter_timing_map.get(enc_id, {})
         time_val = timing_data.get("value")
         if time_val == 0:
-            unit = timing_data.get("unit")
-            if unit == "week":
-                time_value_in_days = time_val * 7
-            else:
-                time_value_in_days = time_val
-
-            time_unit_uid = "UnitDefinition_000364"
+            time_unit_uid = ""
+            for item in time_unit_response.json().get("items", []):
+                if item.get("name") == timing_data.get("unit"):
+                    time_unit_uid = item.get("uid")
+                    break
 
             description = enc.get("description", "")
             label = enc.get("label", "").lower()  # noqa: F841
@@ -197,9 +199,8 @@ async def create_study_visits(study_designs: list, study_uid: str):
             contact_mode_decode = (
                 contact_modes[0].get("decode") if contact_modes else ""
             )
-            contact_mode_uid = (
-                await fetch_contact_mode_uid(decode_value=contact_mode_decode)
-                or "CTTerm_000082"
+            contact_mode_uid = await fetch_contact_mode_uid(
+                decode_value=contact_mode_decode
             )
 
             is_milestone = epoch_first_visit_flag[epoch_uid]
@@ -211,7 +212,7 @@ async def create_study_visits(study_designs: list, study_uid: str):
                     study_epoch_uid=epoch_uid,
                     visit_type_uid=visit_type_uid,
                     visit_contact_mode_uid=contact_mode_uid,
-                    time_value=time_value_in_days,
+                    time_value=time_val,
                     time_unit_uid=time_unit_uid,
                     visit_window_unit_uid=global_visit_window_unit_uid,
                     is_global_anchor_visit=time_val == 0,
@@ -271,13 +272,11 @@ async def create_study_visits(study_designs: list, study_uid: str):
         timing_data = encounter_timing_map.get(enc_id, {})
         time_val = timing_data.get("value")
         if time_val != 0:
-            unit = timing_data.get("unit")
-            if unit == "week":
-                time_value_in_days = time_val * 7
-            else:
-                time_value_in_days = time_val
-
-            time_unit_uid = "UnitDefinition_000364"
+            time_unit_uid = ""
+            for item in time_unit_response.json().get("items", []):
+                if item.get("name") == timing_data.get("unit"):
+                    time_unit_uid = item.get("uid")
+                    break
 
             description = enc.get("description", "")
 
@@ -285,9 +284,8 @@ async def create_study_visits(study_designs: list, study_uid: str):
             contact_mode_decode = (
                 contact_modes[0].get("decode") if contact_modes else ""
             )
-            contact_mode_uid = (
-                await fetch_contact_mode_uid(decode_value=contact_mode_decode)
-                or "CTTerm_000082"
+            contact_mode_uid = await fetch_contact_mode_uid(
+                decode_value=contact_mode_decode
             )
 
             is_milestone = epoch_first_visit_flag[epoch_uid]  # noqa: F841
@@ -299,7 +297,7 @@ async def create_study_visits(study_designs: list, study_uid: str):
                     study_epoch_uid=epoch_uid,
                     visit_type_uid=visit_type_uid,
                     visit_contact_mode_uid=contact_mode_uid,
-                    time_value=time_value_in_days,
+                    time_value=time_val,
                     time_unit_uid=time_unit_uid,
                     visit_window_unit_uid=global_visit_window_unit_uid,
                     is_global_anchor_visit=time_val == 0,

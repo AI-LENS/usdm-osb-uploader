@@ -47,7 +47,7 @@ async def create_study_epochs(study_designs: list, study_uid: str):
             headers = {"accept": "application/json, text/plain, */*"}
             async with httpx.AsyncClient() as client:
                 epochs_codelist = await client.get(
-                    f"{settings.osb_base_url}/ct/terms?codelist_uid=C99079&page_number=1&page_size=1000",  # TODO: hardcoded code
+                    f"{settings.osb_base_url}/ct/terms?codelist_uid=C99079&page_number=1&page_size=1000",
                     headers=headers,
                 )
                 if epochs_codelist.status_code == 200:

@@ -26,7 +26,7 @@ async def create_study_criteria(study_version: dict, study_uid: str):
     for crit in mapped_criteria:
         async with httpx.AsyncClient() as client:
             response = await client.get(
-                f"{settings.osb_base_url}/ct/terms?codelist_uid=C66797&page_number=1&page_size=1000"  # TODO: hardcoded code
+                f"{settings.osb_base_url}/ct/terms?codelist_uid=C66797&page_number=1&page_size=1000"
             )
             for item in response.json().get("items", []):
                 if (

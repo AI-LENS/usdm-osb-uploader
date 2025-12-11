@@ -15,7 +15,7 @@ async def create_study_high_level_design(study_designs: list, study_uid: str):
         study_type_code = studyType.get("code", "")
 
         if study_type_code:
-            endpoint = f"{settings.osb_base_url}/ct/terms?codelist_uid=C99077&page_number=1&page_size=1000"  # TODO: hardcoded code
+            endpoint = f"{settings.osb_base_url}/ct/terms?codelist_uid=C99077&page_number=1&page_size=1000"
             async with httpx.AsyncClient() as client:
                 response = await client.get(endpoint, headers=headers)
                 if response.status_code == 200:
@@ -36,7 +36,7 @@ async def create_study_high_level_design(study_designs: list, study_uid: str):
         phase_code = standardCode.get("code", "")
 
         if phase_code:
-            endpoint = f"{settings.osb_base_url}/ct/terms?codelist_uid=C66737&page_number=1&page_size=1000"  # TODO: hardcoded code
+            endpoint = f"{settings.osb_base_url}/ct/terms?codelist_uid=C66737&page_number=1&page_size=1000"
             async with httpx.AsyncClient() as client:
                 response = await client.get(endpoint, headers=headers)
                 if response.status_code == 200:
@@ -58,7 +58,7 @@ async def create_study_high_level_design(study_designs: list, study_uid: str):
         ]
 
         if trial_type_codes_list:
-            endpoint = f"{settings.osb_base_url}/ct/terms?codelist_uid=C66739&page_number=1&page_size=1000"  # TODO: hardcoded code
+            endpoint = f"{settings.osb_base_url}/ct/terms?codelist_uid=C66739&page_number=1&page_size=1000"
             headers = {"accept": "application/json, text/plain, */*"}
             async with httpx.AsyncClient() as client:
                 response = await client.get(endpoint, headers=headers)
